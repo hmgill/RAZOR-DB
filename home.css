@@ -1,0 +1,56 @@
+#block_b {
+    background: url('https://razor.luddy.indianapolis.iu.edu/media/general/razor-background-1.png');
+    background-size: contain;
+    border-radius: 20px 20px 0 0;
+}
+
+#block_e {
+    border-radius: 0 0 20px 20px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    margin: 0 auto;
+}
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+/* Custom styles for SlimSelect */
+.ss-list .ss-option:hover {
+    background-color: #f0f0f0 !important;
+    color: #000 !important;
+}
+.ss-list .ss-option.ss-highlighted {
+    background-color: #f0f0f0 !important;
+    color: #000 !important;
+}
+.ss-list .ss-option.ss-selected {
+    background-color: #f0f0f0 !important;
+    color: #000 !important;
+}
+.ss-search input:focus {
+    border-color: #f0f0f0 !important;
+    box-shadow: 0 0 0 0.2rem rgba(240, 240, 240, 0.25) !important;
+}
+
+
+a {
+  text-decoration: none; /* Removes the default underline */
+  transition: all 0.3s ease; /* Makes the change smooth */
+}
+
+a:hover {
+  text-decoration: underline; /* Adds underline on hover */
+  font-size: 1.1em; /* Increases font size by 10% */
+}
+
+video {
+  --video-width: 960;
+  --video-height: 720;
+  aspect-ratio: var(--video-width) / var(--video-height);
+  width: 100%;
+  height: auto;
+}

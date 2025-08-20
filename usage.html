@@ -1,0 +1,146 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <link rel="icon" type="image/x-icon" href="favicon.ico?v=1">
+   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <script src="https://kit.fontawesome.com/80f6f556bc.js" crossorigin="anonymous"></script>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.8.1/slimselect.min.css" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.15.10/dist/sweetalert2.min.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="./home.css?v=1"/>
+   <!-- Event Emitter -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/eventemitter3/5.0.1/index.min.js"></script>
+   <!-- Slim Select 2 -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.8.1/slimselect.min.js"></script>
+   <!-- Sweet Alerts 2 -->
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.15.10/dist/sweetalert2.all.min.js"></script>
+
+   <title>RAZOR Usage</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "RAZOR Usage Instructions",
+  "description": "Tutorial and usage instructions for the RAZOR virus search and PCR primer validation tool",
+  "url": "https://razor.luddy.indianapolis.iu.edu/usage.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "RAZOR",
+    "url": "https://razor.luddy.indianapolis.iu.edu/"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://razor.luddy.indianapolis.iu.edu/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Usage",
+        "item": "https://razor.luddy.indianapolis.iu.edu/usage.html"
+      }
+    ]
+  },
+  "mainContentOfPage": {
+    "@type": "VideoObject",
+    "name": "RAZOR Usage Tutorial",
+    "description": "Step-by-step instructions on how to use the RAZOR virus search and primer validation tool",
+    "thumbnailUrl": "https://razor.luddy.indianapolis.iu.edu/media/video/razor_usage_video_poster.png",
+    "contentUrl": "https://razor.luddy.indianapolis.iu.edu/media/video/razor_usage_with_captions.mp4",
+    "uploadDate": "2025-04-22T00:00:00Z",
+    "potentialAction": {
+      "@type": "WatchAction",
+      "target": "https://razor.luddy.indianapolis.iu.edu/usage.html"
+    }
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Janga Lab at Indiana University Indianapolis",
+    "url": "https://janga.lab.indianapolis.iu.edu/"
+  },
+  "relatedLink": [
+    "https://www.primer3plus.com/primer3plusAbout.html",
+    "https://github.com/Janga-Lab/RAZOR",
+    "https://razor.luddy.indianapolis.iu.edu/policy.html",
+    "https://razor.luddy.indianapolis.iu.edu/validate.html"
+  ],
+  "about": {
+    "@type": "SoftwareApplication",
+    "name": "RAZOR",
+    "applicationCategory": "Scientific",
+    "operatingSystem": "Any"
+  }
+}
+</script>   
+<!-- Open Graph / Social Media Tags -->
+<meta property="og:title" content="RAZOR Usage - PCR Primer Database Guide">
+<meta property="og:description" content="Learn how to use the RAZOR database for virus detection PCR primers. Watch our tutorial video on accessing and utilizing validated primers for various viruses including SARS-CoV-2 and influenza.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://razor.luddy.indianapolis.iu.edu/usage.html">
+<meta property="og:site_name" content="RAZOR">
+</head>
+<body>
+  <div class="mx-[10%] mt-[1%] ">
+    <div class="min-h-[5vh] mb-2 flex justify-end " id="block_a">
+      <ul class="menu menu-md menu-horizontal bg-base-100">
+        <li>
+          <a href="https://razor.luddy.indianapolis.iu.edu/"><i class="fa-solid fa-house"></i>Home</a>
+        </li>
+        <li>
+          <a href="https://razor.luddy.indianapolis.iu.edu/usage.html"><i class="fa-solid fa-book"></i>Usage</a>
+        </li>
+        <li>
+          <a href="https://razor.luddy.indianapolis.iu.edu/validate.html"><i class="fa-solid fa-virus"></i>Validate Primers</a>
+        </li>
+      </ul>
+    </div>
+    <div class="h-[30vh] bg-gray-200 mb-2" id="block_b">
+    </div>
+    
+    <!-- Block E with darker background -->
+    <div class="block min-h-[15vh] bg-gray-200 flex items-center justify-center border-2 border-gray-300 relative mb-2 mt-4" id="block_e">
+      <!-- Inner lighter box taking 90% of space with left-aligned text -->
+      <div class="w-[50%] h-[80%] bg-white rounded-lg flex items-center justify-center p-4 video-container">
+	<video controls poster="./media/video/razor_usage_video_poster.png">
+	  <source src="./media/video/razor_usage_with_captions.mp4" type="video/mp4">
+	    Your browser does not support the video tag.
+	</video>
+      </div>
+    </div>
+    
+    <!-- Block F with horizontal divisions but no dividers -->
+    <div class="min-h-[5vh] flex justify-between mb-2" id="block_f">
+      <div class="flex-1 flex items-center justify-center" id="block_f1">
+          <a href="https://razor.luddy.indianapolis.iu.edu/policy.html"><i class="fa-solid fa-link"></i>  Privacy Policy</a>
+      </div>
+      
+      <!-- F1: Left section -->
+      <div class="flex-1 flex items-center justify-center" id="block_f1">
+          <a href="https://www.primer3plus.com/primer3plusAbout.html"><i class="fa-solid fa-link"></i>  Primer3</a>	
+      </div>
+      
+      <!-- F2: Middle section -->
+      <div class="flex-1 flex items-center justify-center" id="block_f2">
+          <a href="https://github.com/Janga-Lab/RAZOR"><i class="fa-solid fa-link"></i>  RAZOR GitHub</a>	
+      </div>
+      
+      <!-- F3: Right section -->
+      <div class="flex-1 flex items-center justify-center" id="block_f3">
+          <a href="https://janga.lab.indianapolis.iu.edu/"><i class="fa-solid fa-link"></i>  Janga Lab at Indiana University Indianapolis</a>	
+      </div>
+    </div>    
+
+  </div>
+
+
+  
+</body>
+</html>

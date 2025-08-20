@@ -1,0 +1,9 @@
+# Block all bots from specific paths
+User-agent: *
+Disallow: /cgi-bin/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /node_modules/
+Disallow: /uploads/
+Disallow: /php/
+

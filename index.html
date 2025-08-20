@@ -1,0 +1,431 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="favicon.ico?v=1" type="image/x-icon">  
+   <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+   <script src="https://cdn.tailwindcss.com"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+   <script src="https://kit.fontawesome.com/80f6f556bc.js" crossorigin="anonymous"></script>
+   <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.8.1/slimselect.min.css" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="./home.css?v=1"/>
+   <!-- Event Emitter -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/eventemitter3/5.0.1/index.min.js"></script>
+   <!-- Slim Select 2 -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.8.1/slimselect.min.js"></script>
+   <title>RAZOR</title>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "RAZOR",
+  "description": "A tool for virus search and PCR primer validation for viral detection",
+  "applicationCategory": "Scientific",
+  "operatingSystem": "Any",
+  "url": "https://razor.luddy.indianapolis.iu.edu/",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "Janga Lab at Indiana University Indianapolis",
+    "url": "https://janga.lab.indianapolis.iu.edu/"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://razor.luddy.indianapolis.iu.edu/results.html?virus={virus_name}"
+    },
+    "query-input": "required name=virus_name"
+  },
+  "downloadUrl": [
+    "https://razor.luddy.indianapolis.iu.edu/downloads/razor_database.zip",
+    "https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip",
+    "https://razor.luddy.indianapolis.iu.edu/downloads/razor_validated_primer_images.zip"
+  ],
+  "keywords": "virus, PCR primers, coronavirus, SARS-CoV-2, influenza, primer validation",
+  "softwareVersion": "1.0",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "name": "RAZOR - Virus Search Tool",
+    "description": "Search and validate PCR primers for viral detection",
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://razor.luddy.indianapolis.iu.edu/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Usage",
+          "item": "https://razor.luddy.indianapolis.iu.edu/usage.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Validate Primers",
+          "item": "https://razor.luddy.indianapolis.iu.edu/validate.html"
+        }
+      ]
+    }
+  }
+}
+</script>
+<meta property="og:title" content="RAZOR - Virus PCR Primer Database">
+<meta property="og:description" content="RAZOR provides a comprehensive database of validated PCR primers for virus detection, including SARS-CoV-2, influenza, and respiratory viruses. Developed by Janga Lab at Indiana University Indianapolis.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://razor.luddy.indianapolis.iu.edu/">
+<meta property="og:site_name" content="RAZOR">
+   
+</head>
+<body>
+  <div class="mx-[10%] mt-[1%] ">
+    <div class="min-h-[5vh] mb-2 flex justify-end " id="block_a">
+      <ul class="menu menu-md menu-horizontal bg-base-100">
+        <li>
+          <a href="https://razor.luddy.indianapolis.iu.edu/"><i class="fa-solid fa-house"></i>Home</a>
+        </li>
+        <li>
+          <a href="https://razor.luddy.indianapolis.iu.edu/usage.html"><i class="fa-solid fa-book"></i>Usage</a>
+        </li>
+        <li>
+          <a href="https://razor.luddy.indianapolis.iu.edu/validate.html"><i class="fa-solid fa-virus"></i>Validate Primers</a>
+        </li>
+      </ul>
+    </div>
+    <div class="h-[30vh] bg-gray-200 mb-2" id="block_b">
+    </div>
+    
+    <div class="block min-h-[20vh] bg-gradient-to-b from-white to-gray-100 flex items-center justify-center border-2 border-gray-300 relative mb-2 mt-4" id="block_c">
+      <div class="absolute -top-3 left-4 bg-gradient-to-b from-white to-gray 100 px-2"><p class="mb-6 text-lg font-semibold text-gray-500">Virus Search</p></div>
+      <form autocomplete="off" onsubmit="event.preventDefault()">
+        <div class="join w-96">
+	  <select id="slim-select"></select>
+          <button class="btn btn-warning btn-disabled" id="go">go</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="block min-h-[15vh] bg-gradient-to-b from-white to-gray-100 flex border-2 border-gray-300 relative mb-2 mt-4" id="block_d">
+      <div class="absolute -top-3 left-4 bg-gradient-to-b from-white to-gray 100 px-2">
+	<p class="mb-6 text-lg font-semibold text-gray-500">Downloads</p>
+      </div>
+      
+      <!-- D1: Left section -->
+      <div class="flex-1 flex items-center justify-center border-r border-gray-200" id="block_d1">
+	<div class="text-center">
+	  <h2 class="text-xl font-semibold mb-2 text-gray-500">Download Complete Database</h2>
+	  <a class="text-gray-600" href="https://razor.luddy.indianapolis.iu.edu/downloads/razor_database.zip">Database</a>
+	</div>
+      </div>
+      
+      <!-- D2: Middle section -->
+      <div class="flex-1 flex items-center justify-center border-r border-gray-200" id="block_d2">
+	<div class="text-center">
+	  <h2 class="text-xl font-semibold mb-2 text-gray-500">Download PCR Primers</h2>
+	  <a class="text-gray-600" href="https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip">PCR Primers Only</a>
+	</div>
+      </div>
+      
+      <!-- D3: Right section -->
+      <div class="flex-1 flex items-center justify-center" id="block_d3">
+	<div class="text-center">
+	  <h2 class="text-xl font-semibold mb-2 text-gray-500">Download Validated Images</h2>
+	  <a class="text-gray-600" href="https://razor.luddy.indianapolis.iu.edu/downloads/razor_validated_primer_images.zip">Validated PCR Primer Images Only</a>
+	</div>
+      </div>
+    </div>        
+    
+
+    <div class="block min-h-[15vh] bg-gradient-to-b from-white to-gray-100 flex items-center justify-center border-2 border-gray-300 relative mb-2 mt-4" id="block_e">
+      <div class="absolute -top-3 left-4 bg-gradient-to-b from-white to-gray 100 px-2">
+	<p class="mb-6 text-lg font-semibold text-gray-500" id="updates-heading">Updates</p>
+      </div>
+      <!-- Inner lighter box with keyboard accessibility -->
+      <div 
+	class="w-[90%] h-[90%] bg-white rounded-lg p-4 overflow-y-scroll" 
+	tabindex="0" 
+	role="region" 
+	aria-labelledby="updates-heading"
+	>
+	<p class="text-gray-600 text-left font-semibold">RAZOR v1.0 available!</p>
+	<!-- Add more content here as needed -->
+      </div>
+    </div>
+
+    
+    <!-- Block F with horizontal divisions but no dividers -->
+    <div class="min-h-[5vh] flex justify-between mb-2" id="block_f">
+      <div class="flex-1 flex items-center justify-center" id="block_f1">
+          <a href="https://razor.luddy.indianapolis.iu.edu/policy.html"><i class="fa-solid fa-link"></i>  Privacy Policy</a>
+      </div>
+
+      
+      <div class="flex-1 flex items-center justify-center" id="block_f1">
+          <a href="https://www.primer3plus.com/primer3plusAbout.html"><i class="fa-solid fa-link"></i>  Primer3</a>
+      </div>
+
+      <!-- F2: Middle section -->
+      <div class="flex-1 flex items-center justify-center" id="block_f2">
+          <a href="https://github.com/Janga-Lab/RAZOR"><i class="fa-solid fa-link"></i>  RAZOR GitHub</a>
+      </div>
+
+      <!-- F3: Right section -->
+      <div class="flex-1 flex items-center justify-center" id="block_f3">
+          <a href="https://janga.lab.indianapolis.iu.edu/"><i class="fa-solid fa-link"></i>  Janga Lab at Indiana University Indianapolis</a>
+      </div>
+    </div>    
+
+
+  </div>
+  
+  <script type="module">
+    
+
+    (async () => {
+	
+	window.selected_virus_data = null;
+	
+	const emitter = new EventEmitter();
+	
+	const select = document.getElementById("slim-select");
+	const go = document.getElementById("go");
+	
+	
+	await new Promise(resolve => {
+            window.addEventListener('DOMContentLoaded', resolve);
+	});
+
+	function filterByAccessions(virusArray, accessionList) {
+	    // Convert accessionList to Set for O(1) lookup
+	    const accessionSet = new Set(accessionList);
+	    
+	    // Filter the array to only include objects with matching accessions
+	    return virusArray.filter(virus => accessionSet.has(virus.accession));
+	}
+
+
+	function populate_select() {
+	    var options = `
+            <select id="slim-select">
+                <optgroup label="Coronavirus">
+                    <option value="NC_045512.2">NC_045512.2 | SARS-CoV-2</option>
+                    <option value="OL689430.1">OL689430.1 | SARS-CoV-2 (alpha)</option>
+                    <option value="OR936774.1">OR936774.1 | SARS-CoV-2 (beta)</option>
+                    <option value="OR939692.1">OR939692.1 | SARS-CoV-2 (delta)</option>
+                    <option value="PQ783521.1">PQ783521.1 | SARS-CoV-2 (omicron)</option>
+                    <option value="PQ016349.1">PQ016349.1 | SARS-CoV-2 (omicron XBB)</option>
+                    <option value="NC_004718.3">NC_004718.3 | SARS-CoV-1</option>
+                    <option value="NC_019843.3">NC_019843.3 | MERS Coronavirus </option>                    
+                    <option value="NC_002645.1">NC_002645.1 | Coronavirus 229E</option>                   
+                    <option value="NC_006577.2">NC_006577.2 | Coronavirus HKU1</option>                      
+                    <option value="NC_006213.1">NC_006213.1 | Coronavirus OC43</option>                       
+                    <option value="NC_005831.2">NC_005831.2 | Coronavirus NL63</option>                      
+                </optgroup>
+                <optgroup label="Enterovirus">
+                    <option value="NC_001612.1">NC_001612.1 | Enterovirus A</option> 
+                    <option value="NC_001472.1">NC_001472.1 | Enterovirus B</option> 
+                    <option value="NC_001617.1">NC_001617.1 | Rhinovirus A</option>
+                    <option value="NC_038312.1">NC_038312.1 | Rhinovirus B</option> 
+                    <option value="NC_009996.1">NC_009996.1 | Rhinovirus C</option>                     
+                </optgroup>
+                <optgroup label="Pneumovirus">
+                    <option value="NC_001803.1">NC_001803.1 | Respiratory Syncytial Virus (RSV)</option> 
+                    <option value="NC_039199.1">NC_039199.1 | Human Metapneumovirus (hMPV)</option>  
+                </optgroup>
+                <optgroup label="Parainfluenza">
+                    <option value="NC_003461.1">NC_003461.1 | Parainfluenza 1</option> 
+                    <option value="NC_001796.2">NC_001796.2 | Parainfluenza 3</option>
+                    <option value="NC_021928.1">NC_021928.1 | Parainfluenza 4a m25</option> 
+                    <option value="NC_006430.1">NC_006430.1 | Parainfluenza 5 w3a</option>                      
+                </optgroup>
+                 <optgroup label="Influenza A (H1N1)">
+                    <option value="NC_026438.1">NC_026438.1 | Influenza A (H1N1) Segment 1</option> 
+                    <option value="NC_026435.1">NC_026435.1 | Influenza A (H1N1) Segment 2</option>       
+                    <option value="NC_026437.1">NC_026437.1 | Influenza A (H1N1) Segment 3</option>     
+                    <option value="NC_026433.1">NC_026433.1 | Influenza A (H1N1) Segment 4</option>                       
+                    <option value="FJ969536.1">FJ969536.1 | Influenza A (H1N1) Segment 5</option>                        
+                    <option value="FJ984386.1">FJ984386.1 | Influenza A (H1N1) Segment 6</option>                        
+                    <option value="FJ969537.1">FJ969537.1 | Influenza A (H1N1) Segment 7</option>                        
+                    <option value="FJ969538.1">FJ969538.1 | Influenza A (H1N1) Segment 8</option>                           
+                </optgroup> 
+                 <optgroup label="Influenza A (H5N1)">
+                    <option value="PQ667147.1">PQ667147.1 | Influenza A (H1N1) Segment 1</option> 
+                    <option value="PQ667148.1">PQ667148.1 | Influenza A (H5N1) Segment 2</option>       
+                    <option value="PQ667149.1">PQ667149.1 | Influenza A (H5N1) Segment 3</option>     
+                    <option value="PQ667150.1">PQ667150.1 | Influenza A (H5N1) Segment 4</option>                       
+                    <option value="PQ667151.1">PQ667151.1 | Influenza A (H5N1) Segment 5</option>                        
+                    <option value="PQ667152.1">PQ667152.1 | Influenza A (H5N1) Segment 6</option>                        
+                    <option value="PQ667153.1">PQ667153.1 | Influenza A (H5N1) Segment 7</option>                        
+                    <option value="PQ667154.1">PQ667154.1 | Influenza A (H5N1) Segment 8</option>                           
+                </optgroup> 
+            </select>
+            `
+	    select.innerHTML = options;
+
+            new SlimSelect({
+		select: '#slim-select',
+		settings: {
+                    showSearch: true,
+                    searchPlaceholder: 'NCBI Accession or Virus Name',
+                    allowDeselect: false
+		}
+            });
+	};
+
+
+
+	populate_select();
+	
+        get_request(
+            "https://razor.luddy.indianapolis.iu.edu/php/virus_search2.php",
+            "search_success",
+            "search_error"
+        )
+
+
+
+	function addDisplayAttribute(virusArray, targetAccession) {
+	    // Map over array to add display attribute
+	    return virusArray.map(virus => ({
+		...virus,
+		display: virus.accession === targetAccession
+	    }));
+	}
+
+	
+	function get_result_data(select_value) {
+
+	    var original_accession = select_value;
+	    // influenza A (H5N1)
+	    var sars_cov_2 = ["NC_045512.2", "OL689430.1", "OR936774.1", "OR939692.1", "PQ783521.1", "PQ016349.1"];
+	    var h1n1 = ["NC_026438.1", "NC_026435.1", "NC_026437.1", "NC_026433.1", "FJ969536.1", "FJ984386.1", "FJ969537.1", "FJ969538.1"];
+	    var h5n1 = ["PQ667148.1", "PQ667149.1", "PQ667150.1", "PQ667151.1", "PQ667152.1", "PQ667153.1", "PQ667154.1", "PQ667147.1"]
+	    if (sars_cov_2.includes(select_value)) {
+		select_value = sars_cov_2
+	    }
+	    else if (h1n1.includes(select_value)) {
+		select_value = h1n1
+	    }
+	    else if (h5n1.includes(select_value)) {
+		select_value = h5n1
+	    }
+	    else {
+		select_value = [select_value];
+	    }
+            var result = filterByAccessions(window.virus_data, select_value);
+	    result = addDisplayAttribute(result, original_accession);
+
+	    window.result = result
+
+	}
+
+
+	function set_virus_data(virus_data) {
+	    window.virus_data = virus_data;
+	    get_result_data(select.value);
+	    go.classList.remove('btn-disabled');	    
+	};
+
+
+	select.addEventListener('change', (event) => {
+	    var select_value = event.target.value;
+	    get_result_data(select_value);	    
+	});
+	
+
+	go.addEventListener('click', () => {
+	    console.log(window.virus_data[select.value]);
+	    localStorage.setItem('result', JSON.stringify(window.result));
+	    window.location.href = 'https://razor.luddy.indianapolis.iu.edu/results.html';	    
+	});	
+	
+	
+	
+        emitter.on("search_success", (data) => {
+	    // populate the dropdown
+	    set_virus_data(data);
+        });
+
+
+	
+	const objectToArray = obj => Object.entries(obj).map(([key, value]) => ({
+	    id: key,
+	    ...value
+	}));
+
+
+
+	async function get_privacy_policy() {
+	    fetch("https://privacygen.iu.edu/api/v1/notice/notice_id?format=json", {
+		method: 'get',
+		mode: 'no-cors',
+		headers: {"Authorization": "4e9919268263e5df8f88b0605bb63d5cb8fa748d"}
+	    }).then(function(response) {
+		console.log(response)
+
+	    });
+	}
+		  		   
+
+	get_privacy_policy();
+
+        async function get_request(url, success_event_name, error_event_name) {
+            console.log(url)
+            // Default headers
+            const request_headers = {
+                "Content-Type" : "application/json"
+            }
+
+            // Merge default options with user-provided options
+            const request = {
+                method: "GET",
+                headers: request_headers,
+            };
+
+            try {
+                const response = await fetch(url, request);
+
+                // Check if the response is ok (status in the range 200-299)
+                if (!response.ok) {
+                    emitter.emit(
+                        error_event_name,
+                        response
+                    )
+                }
+
+                // Parse and return the JSON response
+                var result = await response.json();
+                emitter.emit(
+                    success_event_name,
+                    objectToArray(result)
+                )
+		// Object.values(result
+            } catch (error) {
+                console.log(error);
+                // Handle any errors that occurred during the request
+                emitter.emit(
+                    error_event_name,
+                    error
+                )
+            }
+        };
+
+	
+	
+	
+	
+    })();
+  
+  </script>
+</body>
+</html>

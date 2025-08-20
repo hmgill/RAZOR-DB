@@ -1,0 +1,1949 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAZOR Result Page</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v=1">
+    <!-- Out of Box CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.23/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.1/styles/ag-grid.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.1/styles/ag-theme-alpine.css">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.15.10/dist/sweetalert2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />   
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="./styles.css?v=2"/>
+    
+    <!-- Alpine.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine.js"></script>
+    <!-- igv.js -->
+    <script src="https://cdn.jsdelivr.net/npm/igv@3.1.3/dist/igv.min.js" integrity="sha256-HlVEYSdKlcszX9gh/b1t5UFGMaeJOUJSlioS4p2pH3E=" crossorigin="anonymous"></script>
+    <!-- Event Emitter -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/eventemitter3/5.0.1/index.min.js"></script>
+    <!-- AG Grid Community -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <!-- plotly.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.27.1/plotly.min.js"></script>    
+    <!-- sweetalerts 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.15.10/dist/sweetalert2.all.min.js"></script>
+    <!-- fontawesome 2 -->
+    <script src="https://kit.fontawesome.com/80f6f556bc.js" crossorigin="anonymous"></script>
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "RAZOR PCR Primer Results",
+  "description": "Interactive visualization and analysis tool for PCR primers targeting viral genomes, including detailed primer information and genome browser",
+  "url": "https://https://razor.luddy.indianapolis.iu.edu/results.html",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "RAZOR",
+    "url": "https://razor.luddy.indianapolis.iu.edu/"
+  },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Search",
+        "item": "https://razor.luddy.indianapolis.iu.edu/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "PCR Primer Results",
+        "item": "https://razor.luddy.indianapolis.iu.edu/results.html"
+      }
+    ]
+  },
+  "mainEntity": {
+    "@type": "Dataset",
+    "name": "Viral PCR Primer Collection",
+    "description": "Collection of PCR primers designed for various viral genomes including SARS-CoV-2, influenza, and other respiratory viruses",
+    "creator": {
+      "@type": "Organization",
+      "name": "Janga Lab at Indiana University Indianapolis",
+      "url": "https://janga.lab.indianapolis.iu.edu/"
+    },
+    "license": "https://razor.luddy.indianapolis.iu.edu/policy.html",
+    "variableMeasured": [
+      {
+        "@type": "PropertyValue",
+        "name": "Primer Pair ID",
+        "description": "Unique identifier for PCR primer pair"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Amplicon Size",
+        "description": "Size of the PCR product in base pairs",
+        "unitText": "bp"
+      },
+      {
+        "@type": "PropertyValue",
+        "name": "Primer TM",
+        "description": "Melting temperature of primers",
+        "unitText": "°C"
+      }
+    ]
+  },
+  "specialty": [
+    "Molecular Biology",
+    "Virology",
+    "PCR Diagnostics"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+    "url": "https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip"
+  },
+  "potentialAction": [
+    {
+      "@type": "DownloadAction",
+      "name": "Download Selected Primers",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip"
+      }
+    },
+    {
+      "@type": "DownloadAction",
+      "name": "Download All Primers",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip"
+      }
+    }
+  ],
+  "publisher": {
+    "@type": "EducationalOrganization",
+    "name": "Indiana University Indianapolis",
+    "url": "https://www.iu.edu/",
+    "department": {
+      "@type": "Organization",
+      "name": "Janga Lab at Indiana University Indianapolis",
+      "url": "https://janga.lab.indianapolis.iu.edu/"
+    }
+  },
+  "hasPart": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "IGV Browser",
+      "applicationCategory": "Genome Browser",
+      "operatingSystem": "Any"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "AG Grid",
+      "applicationCategory": "DataGrid",
+      "operatingSystem": "Any"
+    }
+  ],
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Researchers, Scientists, Laboratory Technicians"
+  },
+  "keywords": "PCR primers, viral genome, SARS-CoV-2, influenza, respiratory viruses, genomics, amplicon, primer design"
+}
+</script>
+<!-- Open Graph / Social Media Tags -->
+<meta property="og:title" content="RAZOR Results - PCR Primer Analysis">
+<meta property="og:description" content="Interactive visualization of PCR primers for viral detection. Analyze viral genome sequences, primer locations, and technical specifications with RAZOR's comprehensive primer database.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://razor.luddy.indianapolis.iu.edu/results.html">
+<meta property="og:site_name" content="RAZOR">
+</head>
+
+<body>
+  
+
+  <div class="main-block" id="display">
+    
+    <!-- Block A with subdivisions -->
+    <div class="block-a flex mb-2 ">
+      <!-- A1 -->
+      <div class="block-a1 w-1/2">
+        <div class="breadcrumbs">
+          <ul id="breadcrumb-items">
+            <li><a href="https://razor.luddy.indianapolis.iu.edu/" class="text-gray-500">Search</a></li>
+            <li><a class="text-gray-500">PCR Primer Results</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- A2 -->
+      <div class="block-a2 w-1/2 flex justify-end items-center">
+	<ul class="menu menu-md menu-horizontal bg-base-100">	
+        <li>
+          <a href="https://razor.luddy.indianapolis.iu.edu/"><i class="fa-solid fa-house"></i>Home</a>
+        </li>
+        <li>
+          <a href="https://razor.luddy.indianapolis.iu.edu/usage.html"><i class="fa-solid fa-book"></i>Usage</a>
+        </li>
+        <li>
+          <a href="https://razor.luddy.indianapolis.iu.edu/validate.html"><i class="fa-solid fa-virus"></i>Validate Primers</a>
+        </li>	
+      </div>
+      </ul>
+    </div>
+    
+    
+
+    <!-- Block B -->
+    <div class="block-b overflow-scroll items-center igv-container">
+      <div id="igv-div"></div>
+    </div>
+    
+    <!-- Block C with subdivisions -->
+    <div class="block-c flex">
+      
+      <!-- C1 -->
+      <div class="block-c1 w-1/3 card bg-base-200 card-compact card-bordered overflow-scroll">
+        <div class="flex-col card-body">
+          <!-- C1 Input Bars -->
+          <div class="join justify-center">
+	    <select class="select select-bordered join-item quarter-width" id="col-select">
+	    </select>
+	    <div>
+	      <div>
+                <input type="number" class="input input-bordered join-item" min="0" placeholder="min" id="input-min" />
+	      </div>
+	    </div>
+	    <div>
+	      <div>
+                <input type="number" class="input input-bordered join-item" min="0" placeholder="max" id="input-max"/>
+	      </div>
+	    </div>
+	    <div class="indicator">
+	      <button class="btn join-item btn-warning" id="filter-reset">Reset</button>
+	    </div>
+          </div>
+          <div id="histogram">
+          </div>
+        </div>
+      </div>
+      
+      <!-- C2 -->
+      <div class="block-c2 w-2/3 card bg-base-200 card-compact card-bordered overflow-scroll">
+	<div class="c2-container">
+	  <div class="flex justify-end">
+	    <div class="join">
+              <div class="indicator">
+		<input type="text" placeholder="search by ID" class="input join-item" id="filter-by-id" />
+              </div>	      
+              <div class="indicator">
+                <button class="btn join-item btn-warning" id="filter-by-validated">Show Validated Only</button>
+              </div>	      
+	      <div class="indicator">
+		<button class="btn join-item btn-warning" id="download-selected">Download Selections</button>
+	      </div>	  
+	      <div class="indicator">
+		<button class="btn join-item btn-warning" id="download-all">Download All</button>
+	      </div>
+	    </div>
+	  </div>
+          <div>
+            <div id="pcr-table" style="height: 300px; width: 100%;"></div>
+          </div>
+          <br>	  
+	</div>
+      </div>
+    </div>
+  
+    
+    <!-- Block D -->
+    <div class="block-d"></div>
+  </div>
+
+  <div id="modalContainer">
+
+
+
+
+
+  <script type="module">
+
+       // Custom Checkbox Cell Renderer
+        class DaisyCheckboxRenderer {
+            init(params) {
+                this.params = params;
+                
+                // Create checkbox element
+                this.checkbox = document.createElement('input');
+                this.checkbox.type = 'checkbox';
+                this.checkbox.className = 'checkbox checkbox-secondary  checkbox-lg';
+                
+                // Create wrapper div for centering
+                this.eGui = document.createElement('div');
+                this.eGui.className = 'flex items-center justify-center h-full';
+                this.eGui.appendChild(this.checkbox);
+                
+                // Set initial state
+                this.checkbox.checked = params.node.isSelected();
+                
+                // Add event listener
+                this.checkbox.addEventListener('click', this.onCheckboxClick.bind(this));
+            }
+
+            onCheckboxClick(event) {
+                event.stopPropagation(); // Prevent row selection when clicking checkbox
+                const checked = event.target.checked;
+                this.params.node.setSelected(checked);
+                
+                // If you need additional handling
+                if (this.params.onChange) {
+                    this.params.onChange(checked, this.params.node);
+                }
+            }
+
+            getGui() {
+                return this.eGui;
+            }
+
+            destroy() {
+                // Cleanup
+                this.checkbox.removeEventListener('click', this.onCheckboxClick);
+            }
+
+            refresh(params) {
+                // Update checkbox state if data changes
+                this.checkbox.checked = params.node.isSelected();
+                return true;
+            }
+        }
+
+    
+
+    (async () => {
+
+
+	var result = JSON.parse(localStorage.getItem('result'));
+	var virus_data = result.find(item => item.display === true);
+	//console.log(result);
+	
+
+	
+
+        const emitter = new EventEmitter();
+
+
+	await new Promise(resolve => {
+	    window.addEventListener('DOMContentLoaded', resolve);
+	});
+
+	const filter_by_id = document.querySelector("#filter-by-id")
+
+        const filter_col = document.querySelector("#col-select")
+        const input_min = document.querySelector('#input-min')
+        const input_max = document.querySelector('#input-max')
+        const filter_reset = document.querySelector("#filter-reset")
+        const histogram = document.querySelector("#histogram");
+	const filter_validated = document.querySelector("#filter-by-validated");
+	const filter_validated_clicks = 0;
+        const download_all = document.querySelector("#download-all");
+        const download_selected = document.querySelector("#download-selected");
+
+	
+
+        const genome = {
+            "id": virus_data.virus_genome_full_name,
+            "name": virus_data.virus_genome_abbreviated_name,
+            "fastaURL": `./genomes/${virus_data.virus_genome_abbreviated_name}.fa`,
+            "indexURL": `./genomes/${virus_data.virus_genome_abbreviated_name}.fa.fai`
+        };
+	
+        const tracks = [
+            {
+                name: "Genes",
+                url: `./bed_files/${virus_data.virus_genome_abbreviated_name}.bed`,
+                format: "bed",
+                displayMode: "EXPANDED",
+                color: "rgb(0, 0, 150)"
+            }
+        ];
+	
+        // Configure IGV
+        const options = {
+            genome : genome,
+            tracks : tracks,
+	    height : 300,
+            showChromosomeWidget : false,
+            showRuler: true
+        };
+	try {
+            // Initialize IGV browser
+            window.browser = await igv.createBrowser(document.getElementById('igv-div'), options);
+            console.log("IGV browser initialized");
+        } catch (error) {
+            console.error('Error initializing IGV:', error);
+	    emitter.emit(
+		"loading-error",
+		error
+	    )
+        }
+
+
+
+
+
+
+	
+    
+	let histogram_plot;
+	update_histogram([]);
+	
+	var checked_ids = [];
+
+	var table_options = set_table_options();
+	var table_modified = false;
+	var table_nodes = []
+	const table_container = document.getElementById("pcr-table");
+	const table_api = agGrid.createGrid(table_container, table_options);      
+
+
+
+	function filterObjectsByIdMatch(objectOfObjects, searchString) {
+	    // Convert search string to lowercase for case-insensitive matching
+	    const searchLower = searchString.toLowerCase();
+	    
+	    // Create a new object to store the filtered results
+	    const filteredObjects = {};
+	    
+	    // Iterate through the original object
+	    for (const key in objectOfObjects) {
+		// Check if the object has its own property (not inherited)
+		if (objectOfObjects.hasOwnProperty(key)) {
+		    const obj = objectOfObjects[key];
+      
+		    // Check if the object has an id property and if it matches the search string
+		    if (obj.id && obj.id.toLowerCase().includes(searchLower)) {
+			// Add the matching object to our filtered results
+			filteredObjects[key] = obj;
+		    }
+		}
+	    }
+	    
+	    return filteredObjects;
+	}
+
+
+	
+	filter_by_id.addEventListener('keypress', function(event) {
+	    // Check if the key pressed was Enter
+	    if (event.key === 'Enter') {
+		// Prevent the default action (form submission if inside a form)
+		event.preventDefault();
+		
+		// get data
+		var common_data_copy = structuredClone(window.common_data);
+		// Get the text value
+		const text_value = filter_by_id.value;
+		
+		var filtered = filterObjectsByIdMatch(common_data_copy, text_value)
+		//console.log(filtered);
+
+		var filtered_data = {data:filtered, modifiers:{skip_table:true, skip_histogram:true}}
+		emitter.emit(
+                    "update_ui_elements",
+                    filtered_data
+		)
+
+		
+		// Optionally clear the input
+		// textInput.value = '';
+	    }
+	});
+
+	
+	
+
+	function check_result_data() {
+	    if (result.length > 1) {
+		result.sort((a, b) => {
+		    // Convert to lowercase for case-insensitive comparison
+		    const nameA = a.virus_genome_full_name.toLowerCase();
+		    const nameB = b.virus_genome_full_name.toLowerCase();
+		    
+		    if (nameA < nameB) return -1;
+		    if (nameA > nameB) return 1;
+		    return 0;
+		});
+		
+		if (document.getElementById("breadcrumb-select") === null) {
+		    const breadcrumb_items = document.querySelector("#breadcrumb-items");
+		    
+		    var breadcrumb_dropdown = `<li><div class="relative"><select id="breadcrumb-select" class="select select-bordered select-sm min-w-64 max-w-xs text-gray-500 bg-base-100 text-ellipsis">`
+		    //breadcrumb_items.insertAdjacentHTML('beforeend', breadcrumb_dropdown);
+		    //var dropdown = document.querySelector("#breadcrumb-select");
+		    result.forEach(option => {
+			if (option.display == true) {
+			    var virus_data = option
+                            breadcrumb_dropdown += `<option value="${option.virus_genome_full_name}" selected>${option.virus_genome_full_name}</option>`;			
+			} else {
+			    breadcrumb_dropdown += `<option value="${option.virus_genome_full_name}">${option.virus_genome_full_name}</option>`;
+			}
+		    });
+		    breadcrumb_dropdown += `</select></div></li>`
+		    breadcrumb_items.insertAdjacentHTML('beforeend', breadcrumb_dropdown);
+		}
+	    }
+	}
+
+	check_result_data();
+
+	if (document.getElementById("breadcrumb-select") != null) {
+	    document.querySelector("#breadcrumb-select").addEventListener('change', (event) => {
+		console.log(result);
+		console.log(event.target.value);
+		result.forEach((item) => {		
+		    if (item.virus_genome_full_name == event.target.value) {
+			item.display = true;
+		    } else {
+			item.display = false;
+		    };
+		});	    
+		check_result_data();
+		localStorage.setItem('result', JSON.stringify(result));
+		console.log(result);
+		location.reload();
+		
+	    });
+	
+	}
+
+
+
+	
+	
+
+
+	function update_histogram(data) {
+	    
+	    var data = data == [] ? data : get_values_by_key(data, filter_col.value);
+	    
+            var trace = {
+		x: data,
+		type: 'histogram',
+		nbinsx: 50,
+		name: 'distribution',
+		marker: {
+		    color: "#000096"
+		}		
+            };
+	
+	    
+	    var min = Math.min(...data);
+            var max = Math.max(...data);
+            var padding = (max - min) * 0.1; // Add 1
+	    
+            const layout = {
+		xaxis: {
+                    title: 'value',
+		    range: [min - padding, max + padding],
+                    rangeselector: {
+			buttons: [
+                            {
+				count: 1,
+				label: '± 1σ',
+				step: 'sigma',
+				stepmode: 'backward'
+                            },
+                            {
+				count: 2,
+				label: '± 2σ',
+				step: 'sigma',
+				stepmode: 'backward'
+                            },
+                            {
+				count: 3,
+				label: '± 3σ',
+				step: 'sigma',
+				stepmode: 'backward'
+                            },
+                            {
+				step: 'all',
+				label: 'All'
+                            }
+			]
+                    }
+		},
+		yaxis: {
+                    title: "count"
+		}
+            };
+	    
+            const config = {
+		responsive : true,
+		displayModeBar : true,
+		displaylogo: false,	      
+		modeBarButtonsToRemove: [
+                    'lasso2d',
+                    'select2d',
+                    'pan2d',
+		    "zoom",
+		    "zoomIn",
+		    "zoomOut",
+		    "autoscale",
+		    'resetScale2d',
+		    'resetView',
+		    'toImage'
+		],
+            };
+	
+	    if (!histogram_plot) {
+		Plotly.newPlot("histogram", [trace], layout, config).then(gd => {
+                    histogram_plot = gd;
+                });
+            } else {
+		Plotly.react("histogram", [trace], layout, config);
+            }
+	};
+
+
+
+	
+      
+	
+	function rename_objects(objects, newKeyNames) {
+	    return objects.map(obj => {
+		const newObj = {};
+		Object.keys(obj).forEach((key, index) => {
+		    const newKey = newKeyNames[index] || key; // Use new key if available, otherwise keep the old one
+		    newObj[newKey] = obj[key];
+		});
+		return newObj;
+	    });
+	};
+
+
+      
+
+    
+	function get_values_by_key(obj, keyName) {
+	    return Object.values(obj).map(item => item[keyName]);
+	};
+
+	function remove_from_dict_by_val(obj, value) {
+	    for (const key in obj) {
+		if (obj[key] === value) {
+		    delete obj[key];
+		    break; // If you only want to remove the first occurrence
+		}}
+	};
+ 
+	function populate_table(data) {
+	  if (table_modified == false) {
+              table_api.applyTransaction({ add: data });
+	      table_modified = true;
+
+	  } else {
+	      var current_ids = data.map(obj => obj.id);
+
+              // previous table data not in current data
+	      var ids_to_remove = table_nodes.filter(x => !current_ids.includes(x));
+	      var to_remove = ids_to_remove.map(value => ({ id: value }));
+	      
+	      // data that wasnt in previous table view
+	      var to_add = data.filter(obj => !table_nodes.includes(obj.id));
+
+
+	      if ( Object.keys(to_remove).length > 0) {
+		  
+		  table_api.applyTransaction({ remove: to_remove });
+		  to_remove.forEach((obj) => {
+		      table_nodes = table_nodes.filter(value => value != obj.id); 
+		  });
+		  
+	      };
+		  
+              if ( Object.keys(to_add).length > 0) {
+                  table_api.applyTransaction({ add: to_add });
+              };
+	      
+	  };
+	    table_nodes = [];
+            table_api.forEachNode(function (node) {
+                table_nodes.push(node.data.id);
+            });
+	    
+            table_api.applyColumnState({
+                state: [
+                    { colId: "PCR product start", sort: "asc", sortIndex: 0 },
+                ],
+                defaultState: { sort: null },
+            });
+
+	    console.log("ok");
+	    
+	    
+	};
+
+    
+    
+
+      
+      function set_table_options() {
+	  
+	  var column_defs = [
+              {field: 'checkboxCol', headerName: '', width:50,  headerCheckboxSelection: false, checkboxSelection: false, showDisabledCheckboxes: true, sortable:false, headerTooltip: "select", cellRenderer: DaisyCheckboxRenderer},	      
+              {field: "id", headerName:"id", hide: false, lockVisible:true, suppressMovable:true, headerTooltip: "primer pair ID",  sortable:true},
+              {field: "accession", headerName:"accession", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "NCBI Accession Identifier", sortable:true},
+              {field: "virus abbreviation", headerName:"abbreviation", hide:true, lockVisible:true, suppressMovable:false, sortable:true},
+              {field: "isolate", headerName:"isolate", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "virus isolate", sortable:true},
+              {field: "PCR product start", headerName:"amplicon start", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "start coordinate of the PCR product (amplicon)", sortable:true},
+              {field: "PCR product end", headerName:"amplicon end", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "end coordinate of the PCR product (amplicon)", sortable:true},
+              {field: "PCR product size", headerName:"amplicon size", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "size of the PCR product (amplicon)", sortable:true},
+              {field: "PCR product sequence", headerName:"amplicon sequence", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "nucleotide sequence of the PCR product (amplicon)", sortable:true},
+              {field: "PCR product TM", headerName:"amplicon TM ", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "melting temperature of the PCR product (amplicon)", sortable:true},
+              {field: "pair self-binding (anywhere) score", headerName:"pair self-binding (anywhere) score", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "tendency of primers to bind to each other (any position)", sortable:true},
+              {field: "pair self-binding (3') score", headerName:"pair self-binding (3') score", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "tendency of primers to bind to each other (3' position)", sortable:true},
+              {field: "pair TM difference", headerName:"pair TM difference", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "difference in primer melting temperatures", sortable:true},
+              {field: "pair penalty score", headerName:"pair penalty score", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "Primer3 penalty score for PCR primer pair", sortable:true},
+	      {field: "annealing_temp", headerName: "annealing temperature", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "predicted annealing temperature", sortable:true},
+              {field: "forward primer start", headerName:"forward primer start", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "start coordinate for forward primer", sortable:true},
+              {field: "forward primer end", headerName:"forward primer end", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "end coordinate for the forward primer", sortable:true},
+              {field: "forward primer size", headerName:"forward primer size", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "forward primer size (nt)", sortable:true},
+              {field: "forward primer sequence", headerName:"forward primer sequence", hide: false, lockVisible:true, headerTooltip: "forward primer sequence", suppressMovable:false},
+              {field: "forward primer TM", headerName:"forward primer TM", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "forward primer melting temperature", sortable:true},
+              {field: "forward primer GC%", headerName:"forward primer GC%", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "forward primer GC content", sortable:true},
+              {field: "forward primer self-binding (anywhere) score", headerName:"forward primer self-binding (anywhere) score", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "forward primer self-binding tendency (any position)",sortable:true},
+              {field: "forward primer self-binding (3') score", headerName:"forward primer self-binding (3') score", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "forward primer self-binding tendency (3' position)",sortable:true},
+              {field: "forward primer stable hairpin TM", headerName:"forward primer stable hairpin TM", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "forward primer predicted hairpin melting temperature",sortable:true},
+              {field: "forward primer delta G", headerName:"forward primer delta G", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "forward primer free energy required for hairpin structure formation or self-dimerization", sortable:true},
+              {field: "forward primer penalty score", headerName:"forward primer penalty score", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "Primer3 penalty score for forward primer", sortable:true},
+              {field: "reverse primer start", headerName:"reverse primer start", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "reverse primer start coordinate", sortable:true},
+              {field: "reverse primer end", headerName:"reverse primer end", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "reverse primer end coordinate", sortable:true},
+              {field: "reverse primer size", headerName:"reverse primer size", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "reverse primer size (nt)", sortable:true},
+              {field: "reverse primer sequence", headerName:"reverse primer sequence", hide: false, lockVisible:true, headerTooltip: "reverse primer nucleotide sequence", suppressMovable:false},
+              {field: "reverse primer TM", headerName:"reverse primer TM", hide:false, lockVisible:true, suppressMovable:false, headerTooltip: "reverse primer melting temperature", sortable:true},
+              {field: "reverse primer GC%", headerName:"reverse primer GC%", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "reverse primer GC content", sortable:true},
+              {field: "reverse primer self-binding (anywhere) score", headerName:"reverse primer self-binding (anywhere) score", hide: false, lockVisible:true, headerTooltip: "reverse primer self-binding tendency (any position)",  suppressMovable:false},
+              {field: "reverse primer self-binding (3') score", headerName:"reverse primer self-binding (3') score", hide: false, lockVisible:true, headerTooltip: "reverse primer self-binding tendency (3' position)", suppressMovable:false},
+              {field: "reverse primer stable hairpin TM", headerName:"reverse primer stable hairpin TM", hide: false, lockVisible:true, headerTooltip: "reverse primer predicted hairpin structure melting temperature", suppressMovable:false},
+              {field: "reverse primer delta G", headerName:"reverse primer delta G", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "reverse primer free energy required for hairpin structure formation or self-dimerization", sortable:true},
+              {field: "reverse primer penalty score", headerName:"reverse primer penalty score", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "Primer3 penalty score for reverse primer", sortable:true},
+              {field: "experimental validation", headerName:"experimental validation", hide: false, lockVisible:true, suppressMovable:false, headerTooltip: "has this primer pair been experimentally validated?", sortable:true, valueGetter: (params) => Number(params.data) == 1 ? 'True' : 'False'},
+              {field: "experimental validation image", headerName:"validated image name", hide: true, lockVisible:true, suppressMovable:false, sortable:false}
+	  ];
+
+	  var options =  {
+	      columnDefs: column_defs,
+	      rowData: null,
+	      pagination: true,
+              rowSelection: 'multiple',
+              suppressRowClickSelection: true,	      
+	      paginationPageSizeSelector : [50, 100, 250, 500, 1000],
+	      paginationPageSize : 1000,
+	      autoHeaderHeight: true,
+	      autoSizeStrategy: {
+		  type: 'fitCellContents'
+	      },
+              defaultColDef: {
+                  maxWidth: 750
+              },	      
+	      tooltipShowDelay: 0,
+	      tooltipHideDelay: 100,
+	      getRowId: (params) => {
+		  return params.data.id;
+	      },
+	      onRowClicked: (event) => {
+		  var selected_nodes = event.api.getSelectedNodes();
+		  var selected_ids = selected_nodes.map(node => node.data.id);		  
+		  if (!selected_ids.includes(event.data.id)) {
+		      event.node.setSelected(true, true); // true for 'addToSelection'
+		      checked_ids.push(event.data.id)
+		  }
+	      },
+	      onSelectionChanged: (event) => {
+		  row_click_or_select(event);		  
+	      },
+	      onCellMouseOver : (event) => {
+		  var highlight_row = [event.api.getRowNode(event.data.id).data];
+		  emitter.emit(
+                      "show_igv_roi",
+		      {data:highlight_row, clear_previous:true}
+		  )
+		  // call ROI for selected rows, include function option to skip initial clear step
+                  emitter.emit(
+                      "show_igv_roi",
+                      {data:event.api.getSelectedRows(), clear_previous:false}
+                  )
+
+	      },
+	      onGridReady: params => {
+		  const gridElement = document.querySelector('.ag-root');
+		  gridElement.addEventListener('mouseleave', () => {
+		      console.log('Cursor left the grid');
+		  });
+	      }
+	  };
+	  
+	  
+	  return options
+
+      };
+
+
+	function row_click_or_select(event) {
+            emitter.emit(
+                "table_selection_changed",
+                event.api.getSelectedRows()
+            )
+            emitter.emit(
+                "show_igv_roi",
+		{data:event.api.getSelectedRows(), clear_previous:true}
+            )
+            emitter.emit(
+                "show_primer_bed",
+                {}
+            )
+	};
+	
+
+
+
+      
+      async function get_request(url, parameters, success_event_name, error_event_name) {
+	  const search_parameters = new URLSearchParams(parameters);
+	  const search_url = `${url}?${search_parameters.toString()}`
+	  // Default headers
+	  const request_headers = {
+	      "Content-Type" : "application/json"
+	  }
+	  
+	  // Merge default options with user-provided options
+	  const request = {
+              method: "GET",
+              headers: request_headers,
+	  };
+
+	  try {
+              const fetch_response = await fetch(search_url, request);
+
+              // Check if the response is ok (status in the range 200-299)
+              if (!fetch_response.ok) {
+		  emitter.emit(
+		      error_event_name,
+		      fetch_response
+		  )
+	      }
+
+              // Parse and return the JSON response
+              var response = await fetch_response.json();
+	      console.log(response);
+	      response = rename_primer_data(response);
+              emitter.emit(
+		  success_event_name,
+		  response
+	      )
+	      
+	  } catch (error) {
+              // Handle any errors that occurred during the request
+	      emitter.emit(
+		  error_event_name,
+		  error
+	      )
+	  }
+      };
+
+
+      function set_common_data(data) {
+	  window.common_data =  { ...data }
+      };
+
+      
+      function set_option_values(selectElement, optionsArray) {
+	  
+	  selectElement.innerHTML = ''; // Clear existing options
+	  
+	  for (const optionValue of optionsArray) {
+	      const option = document.createElement('option');
+	      option.value = optionValue;
+	      option.text = optionValue; 
+	      selectElement.appendChild(option);
+	  }
+
+	  
+      }
+
+
+	function update_input_ui({object = null, set_boundary = false}) {
+	    console.log("update_input_ui")
+            var object = object != null ? object : window.filter_min_max[filter_col.value];
+
+	    //console.log(object);
+	    
+	    if (set_boundary == true && object.col_modified == false) {
+		console.log("setting  boundary")
+		var min_placeholder = object.min;
+		var max_placeholder = object.max;
+		var min_value = object.min;
+		var max_value = object.max;
+	    } else {
+		var min_placeholder = object.stored_min;
+		var max_placeholder = object.stored_max;
+		var min_value = object.stored_min;
+		var max_value = object.stored_max;
+	    }
+	    
+	    input_min.placeholder = min_placeholder;
+	    input_min.value = min_value;
+	    input_max.placeholder = max_placeholder;
+	    input_max.value = max_value;
+
+	    if (set_boundary == true) {
+		input_min.min = min_value
+		input_min.max = max_value - 1
+		input_max.min = min_value + 1
+		input_max.max = max_value
+	    };
+	};
+
+    function update_min_max({update_info = null}) {
+	
+	// get the column name
+	var column_name = filter_col.value;  
+	var object = window.filter_min_max[column_name];
+
+	//console.log(object);
+	
+	var min_value = update_info != null ? update_info.stored_min : Number(input_min.value);
+	var max_value = update_info != null ? update_info.stored_max : Number(input_max.value);
+	
+	object.stored_min = min_value;
+	object.stored_max = max_value;
+	    
+	// update modified property
+	object.col_modified = true;
+        //console.log(object);
+	
+      };
+	  
+	  
+      
+
+      function get_min_max_by_key(object, key) {
+	  if (!object || object.length === 0) {
+              return { min: null, max: null };
+	  }
+	  let values = object.map(item => item[key]);
+	  
+	  // Filter out any undefined or null values
+	  let valid_values = values.filter(value => value != null);
+	  
+	  if (valid_values.length === 0) {
+              return { min: null, max: null };
+	  }
+
+	  let min = Math.min(...valid_values);
+	  let max = Math.max(...valid_values);
+	  
+	  return {
+              min: min,
+              max: max,
+	      stored_min: min,
+	      stored_max: max,
+	      view_min: min,
+	      view_max: max,	      
+	      col_modified: false
+	  };
+      }
+
+	function get_view_min_max(object, key) {
+	    let values = object.map(item => item[key]);
+	    return {
+		min : Math.min(...values),
+		max : Math.min(...values)
+	    }
+	};
+
+
+        function set_current_view(data) {
+            var cols = ["PCR product start", "PCR product end", "PCR product size", "PCR product TM", "pair self-binding (anywhere) score", "pair self-binding (3') score", "pair TM difference", "pair penalty score", "forward primer start", "forward primer end", "forward primer size", "forward primer TM", "forward primer GC%", "forward primer self-binding (anywhere) score", "forward primer self-binding (3') score", "forward primer stable hairpin TM", "forward primer delta G", "forward primer penalty score", "reverse primer start", "reverse primer end", "reverse primer size", "reverse primer TM", "reverse primer GC%", "reverse primer self-binding (anywhere) score", "reverse primer self-binding (3') score", "reverse primer stable hairpin TM", "reverse primer delta G", "reverse primer penalty score"]
+
+            cols.forEach((col) => {
+		let view = get_view_min_max(data, col);
+                window.filter_min_max[col].view_min = view.min;
+		window.filter_min_max[col].view_max = view.max;
+            });
+
+      };
+
+	
+
+	  
+
+	function set_filter_values({data = null, set_boundary = false}) {
+	    var cols = ["PCR product start", "PCR product end", "PCR product size", "PCR product TM", "pair self-binding (anywhere) score", "pair self-binding (3') score", "pair TM difference", "pair penalty score", "forward primer start", "forward primer end", "forward primer size", "forward primer TM", "forward primer GC%", "forward primer self-binding (anywhere) score", "forward primer self-binding (3') score", "forward primer stable hairpin TM", "forward primer delta G", "forward primer penalty score", "reverse primer start", "reverse primer end", "reverse primer size", "reverse primer TM", "reverse primer GC%", "reverse primer self-binding (anywhere) score", "reverse primer self-binding (3') score", "reverse primer stable hairpin TM", "reverse primer delta G", "reverse primer penalty score"]
+	    
+	    var select = document.getElementById('col-select');
+	    set_option_values(select, cols)
+	    
+	    window.filter_min_max = new Object();
+	    cols.forEach((col) => {
+		window.filter_min_max[col] = get_min_max_by_key(data, col)
+		console.log(window.filter_min_max[col]);
+	    });
+
+	    update_input_ui({data:data, set_boundary:set_boundary});
+	  
+      };
+
+
+      
+
+      function filter_by_value_range(object, key, min, max) {
+	  return Object.entries(object)
+	      .filter(([_, obj]) => 
+		      obj[key] >= min && 
+		      obj[key] <= max
+		     )
+	      .reduce((acc, [id, obj]) => {
+		  acc[id] = obj;
+		  return acc;
+	      }, {});
+      };
+      
+
+      
+
+	  
+	  
+
+
+      function filter_by_ids(objects, ids) {
+          // Return original objects if ids list is empty
+          if (!ids || !ids.length) {
+              return objects;
+          }
+
+          // If objects is empty or not an object, return empty object
+          if (!objects || typeof objects !== 'object' || Array.isArray(objects)) {
+              return {};
+          }
+
+          // Convert ids to Set for O(1) lookup
+          const idSet = new Set(ids);
+
+          // Filter objects and return new object
+          return Object.entries(objects).reduce((acc, [key, value]) => {
+              if (idSet.has(value.id)) {
+                  acc[key] = value;
+              }
+              return acc;
+          }, {});
+      };
+
+
+
+
+	function update_common_data2(modifiers) {
+            var common_data_copy = structuredClone(window.common_data);
+
+	    console.log(modifiers.skip_histogram);
+	    // filter by table IDs, if any
+            //common_data_copy = filter_by_ids(common_data_copy, checked_ids);
+	  
+	    // filter by column min-max values (from input forms, histogram)
+	    Object.entries(window.filter_min_max).forEach(([key, value]) => {
+		common_data_copy = filter_by_value_range(common_data_copy, key, value.stored_min, value.stored_max);
+	    });
+	    
+	    return {data:common_data_copy, modifiers:modifiers}
+	};
+
+
+	function reset_data() {
+	    // reset checked ids
+	    var checked_ids = [];
+
+	    // clear IGV
+            window.browser.clearROIs()
+            window.browser.removeTrackByName("Amplicon");
+
+	    // make sure table rows are deselected
+	    console.log("table_options");
+	    //console.log(table_options);
+	    table_api.deselectAll();
+	    table_api.refreshCells(); 
+
+	    var data = structuredClone(window.common_data);
+	    update_histogram(data);
+	    set_filter_values({data:Object.keys(data).map(key => data[key]), set_boundary:true})
+	    return {data:data, modifiers:{skip_table:false, skip_histogram:true}};
+
+	};
+
+
+	function sanitize_histogram_values(data) {
+	    var min_value = data[0];
+	    var max_value = data[1];
+		
+	    var rounded_cols = ["PCR product start", "PCR product end", "PCR product size", "forward primer start", "forward primer end", "forward primer size", "reverse primer start", "reverse primer end", "reverse primer size"]
+	    var col_name = filter_col.value;
+	    
+	    var obj = window.filter_min_max[col_name];
+	    
+	    if (rounded_cols.includes(col_name)) {
+		min_value = Math.round(min_value);
+		max_value = Math.round(max_value);
+	    }
+	    
+	    //if (min_value < obj.view_min || max_value > obj.view_max) {
+	    //var output = null;
+	    //} else {
+	    var output = {
+		stored_min : min_value,
+		stored_max : max_value
+	    };
+	    
+	    return output;
+	    
+	};
+    
+      
+    function create_bed_roi(data) {
+	return {
+	    chr : data["accession"],
+	    start: data["PCR product start"],
+	    end : data["PCR product end"],
+	    description : data["id"]
+	}
+    };
+
+
+	function show_selected_roi_track(data) {
+	    if (data.clear_previous) {
+		window.browser.clearROIs()
+		// make sure no BED lingering
+		//window.browser.removeTrackByName("Amplicon");
+	    };
+            var data = data.data;	    
+	    // load new
+	    var features = data.map(obj => create_bed_roi(obj));
+	    var color = "rgba(252, 53, 239,0.25)";
+	    
+	    var roi_track = [{
+		color : color,
+		features: features
+	    }];
+	    
+	    window.browser.loadROI(roi_track);
+    };
+
+	function generate_slices({start, stop, step = 50}) {
+	    const slices = [];
+	    let currentStart = start;
+	    while (currentStart < stop) {
+		const currentStop = currentStart + step;
+		slices.push([currentStart, Math.min(currentStop, stop)]);
+		currentStart = currentStop;
+	    }
+	    return slices;
+	}
+
+
+	function get_avg_quality({obj, key = "primer penalty score"}) {
+	    const values = Object.values(obj); 
+	    if (values.length === 0) return 0;
+	    
+	    const sum = values.reduce((acc, item) => acc + Number(item["primer penalty score"]), 0);
+	    return sum / values.length;
+	}
+
+	function create_quality_wig_track(data) {
+	    
+	    var color_scale = {
+		"type": "diverging",
+		"min": 0,
+		"mid": 5,
+		"max": 11,
+		"minColor": "#f5d742",
+		"midColor": "#e004b8",
+		"maxColor": "#ae34c7"		
+	    };
+	    
+	    var track = {
+		name : "Average Penalty Score",
+		type : "wig",
+		min : 0,
+		max : 11,
+		flipAxis : false,
+		order : 0,
+		graphType : "line",
+		displayMode: "EXPANDED",
+		features : data,
+		color : "#e004b8"
+	    }
+
+	    //console.log(browser);
+	    
+	    window.browser.removeTrackByName("Average Penalty Score");
+	    window.browser.loadTrack(track);
+
+	    
+	};
+
+	    
+
+	    
+
+	
+	
+	function show_pcr_quality({data = null}) {
+
+	    console.log("start")
+
+	    var stop = Number(virus_data.genome_length)
+	    var chr = virus_data.accession
+	    
+	    var data = data != null ? data : structuredClone(window.common_data);
+
+	    var slices = generate_slices({start:0, stop:stop, step:100});
+
+	    var pair_quality_scores = [];
+	    
+	    slices.forEach((slice) => {
+		var min = slice[0]
+		var max = slice[1]
+		var filtered_data = Object.fromEntries(
+		    Object.entries(data).filter(([_, value]) => 
+						value["PCR product start"] >= min && value["PCR product start"] <= max
+					       )
+		)
+		var average_quality = Object.values(filtered_data).reduce((sum, item) => sum + Number(item["pair penalty score"]), 0) / Object.values(filtered_data).length;
+		var info = {
+		    "chr" : chr,
+		    "start" : min,
+		    "end" : max,
+		    "value" : average_quality
+		}
+		pair_quality_scores.push(info);
+
+	    });
+
+	    var pair_quality_scores = pair_quality_scores.filter(obj => !isNaN(obj.value));
+	    //console.log(pair_quality_scores);
+	    create_quality_wig_track(pair_quality_scores);
+	    
+
+	    
+
+
+	};
+
+
+
+	function create_primer_bed() {
+	    var data = Object.fromEntries(
+		Object.entries(window.common_data).filter(([key, value]) => checked_ids.includes(value.id))
+	    );
+	    var data = Object.values(data);
+	    
+	    var features = data.map(obj => create_bed_roi(obj));
+
+	    var track = {
+		name : "Amplicon",
+		type : "annotation",
+		format : "bed",
+		order : Number.MAX_VALUE,
+		color : "#ae34c7",
+		minHeight : 200,
+		features : features
+	    }
+            window.browser.removeTrackByName("Amplicon");
+	    window.browser.loadTrack(track);
+	}
+
+	
+
+	function update_ui_elements(data) {
+	    //console.log(data);
+	    var modifiers = data.modifiers;
+	    console.log(modifiers);
+	    var data = Object.values(data.data);
+	    console.log("updating ui...")
+	    // update min and mix inputs
+            update_input_ui({data:data, set_boundary:false});
+	    // update histogram
+	    if (modifiers.hasOwnProperty("skip_histogram")) {
+		if (modifiers["skip_histogram"] != false) {
+		    update_histogram(data);
+		}
+	    } else {
+		update_histogram(data);
+	    };
+	    
+	    if (modifiers.hasOwnProperty("skip_table")) {
+		if (modifiers.skip_table != false) {
+		    console.log("tablepop");
+		    populate_table(data);
+		}
+	    } else {
+		populate_table(data);
+	    }
+	    
+	    // update quality track
+            //show_pcr_quality({data:data});
+
+	    
+	    //console.log(data);
+            //set_filter_values({data:data, set_boundary:false});
+	};
+
+
+	function open_modal(pcrData) {
+
+	    var selected_data = {
+		"id" :  pcrData["id"],
+		"accession" : pcrData["accession"]
+	    };
+
+	    console.log(selected_data);
+
+	    sessionStorage.setItem('selected_data', JSON.stringify(selected_data));
+
+	    // Retrieve data
+	    //const tempValue = sessionStorage.getItem('tempKey');
+
+	    
+	    const modalHTML = `
+        <dialog id="pcr_modal" class="modal modal-bottom sm:modal-middle">
+          <div class="modal-box max-w-6xl w-11/12">
+            <h3 class="font-bold text-lg mb-4">${pcrData.id}</h3>
+            <div role="tablist" class="tabs tabs-bordered whitespace-nowrap overflow-x-auto flex-nowrap w-full mb-2">
+              <a role="tab" class="tab tab-active whitespace-nowrap min-w-max" id="tab_1">Identifiers</a>
+              <a role="tab" class="tab whitespace-nowrap min-w-max" id="tab_2">Amplicon</a>
+              <a role="tab" class="tab whitespace-nowrap min-w-max" id="tab_3">Pair Info</a>
+              <a role="tab" class="tab whitespace-nowrap min-w-max" id="tab_4">Forward Primer</a>
+              <a role="tab" class="tab whitespace-nowrap min-w-max" id="tab_5">Reverse Primer</a>
+              <a role="tab" class="tab whitespace-nowrap min-w-max" id="tab_6">Validation</a>
+            </div>
+            
+            <div id="tab_content" class="py-6 mt-2 min-h-[400px] overflow-y-auto">
+              <!-- Tab content will be loaded here -->
+            </div>
+            
+            <div class="modal-action">
+              <form method="dialog">
+                <button class="btn" onclick="closeModal()">Close</button>
+              </form>
+            </div>
+          </div>
+        </dialog>
+      `;
+	    
+	    document.getElementById('modalContainer').innerHTML = modalHTML;
+	    const modal = document.getElementById('pcr_modal');
+	    modal.showModal();
+	    
+	    // Set up tab click handlers
+	    const tabs = document.querySelectorAll('.tab');
+	    tabs.forEach(tab => {
+		tab.addEventListener('click', () => {
+		    // Remove active class from all tabs
+		    tabs.forEach(t => t.classList.remove('tab-active'));
+		    // Add active class to clicked tab
+		    tab.classList.add('tab-active');
+		    // Load content for the selected tab
+		    loadTabContent(tab.id, pcrData);
+		});
+	    });
+      
+	    // Load initial tab content (Identifiers tab)
+	    loadTabContent('tab_1', pcrData);
+	}
+    
+	// Function to load content for the selected tab
+	function loadTabContent(tabId, pcrData) {
+	    const contentDiv = document.getElementById('tab_content');
+	    let content = '';
+	    
+	    switch(tabId) {
+            case 'tab_1': // Identifiers tab (formerly Metadata)
+		content = `
+            <div class="overflow-x-auto">
+              <table class="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Accession</td>
+                    <td>${pcrData.accession}</td>
+                  </tr>
+                  <tr>
+                    <td>Virus</td>
+                    <td>${pcrData['virus complete name']}</td>
+                  </tr>
+                  <tr>
+                    <td>Isolate</td>
+                    <td>${pcrData['isolate']}</td>
+                  </tr>
+                  <tr>
+                    <td>Genome Length</td>
+                    <td>${pcrData['genome_length']}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `;
+		break;
+		
+            case 'tab_2': // Amplicon tab
+		content = `
+            <div class="overflow-x-auto">
+              <table class="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>PCR Product Start</td>
+                    <td>${pcrData['PCR product start']}</td>
+                  </tr>
+                  <tr>
+                    <td>PCR Product End</td>
+                    <td>${pcrData['PCR product end']}</td>
+                  </tr>
+                  <tr>
+                    <td>PCR Product Size</td>
+                    <td>${pcrData['PCR product size']}</td>
+                  </tr>
+                  <tr>
+                    <td>PCR Product TM</td>
+                    <td>${pcrData['PCR product TM']}</td>
+                  </tr>
+                  <tr>
+                    <td>PCR Product Sequence</td>
+                    <td class="sequence-cell">${pcrData['PCR product sequence']}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `;
+		break;
+		
+            case 'tab_3': // Pair Info tab
+		content = `
+            <div class="overflow-x-auto">
+              <table class="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Annealing Temperature</td>
+                    <td>${pcrData.annealing_temp}</td>
+                  </tr>
+                  <tr>
+                    <td>Pair TM Difference</td>
+                    <td>${pcrData['pair TM difference']}</td>
+                  </tr>
+                  <tr>
+                    <td>Pair Self-Binding (3') Score</td>
+                    <td>${pcrData["pair self-binding (3') score"]}</td>
+                  </tr>
+                  <tr>
+                    <td>Pair Self-Binding (Anywhere) Score</td>
+                    <td>${pcrData["pair self-binding (anywhere) score"]}</td>
+                  </tr>
+                  <tr>
+                    <td>Pair Penalty Score</td>
+                    <td>${pcrData['pair penalty score']}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `;
+		break;
+		
+            case 'tab_4': // Forward Primer tab
+		content = `
+            <div class="overflow-x-auto">
+              <table class="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Forward Primer Sequence</td>
+                    <td>${pcrData['forward primer sequence']}</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Primer Size</td>
+                    <td>${pcrData['forward primer size']}</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Primer Start</td>
+                    <td>${pcrData['forward primer start']}</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Primer End</td>
+                    <td>${pcrData['forward primer end']}</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Primer TM</td>
+                    <td>${pcrData['forward primer TM']}</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Primer GC%</td>
+                    <td>${pcrData['forward primer GC%']}</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Primer ΔG</td>
+                    <td>${pcrData['forward primer delta G']}</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Primer Self Binding (3')</td>
+                    <td>${pcrData["forward primer self-binding (3') score"]}</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Primer Self Binding (anywhere) Score</td>
+                    <td>${pcrData['forward primer self-binding (anywhere) score']}</td>
+                  </tr>
+                  <tr>
+                    <td>Forward Primer Penalty Score</td>
+                    <td>${pcrData['forward primer penalty score']}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `;
+		break;
+          
+            case 'tab_5': // Reverse Primer tab
+		content = `
+            <div class="overflow-x-auto">
+              <table class="table table-zebra w-full">
+                <thead>
+                  <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Reverse Primer Sequence</td>
+                    <td>${pcrData['reverse primer sequence']}</td>
+                  </tr>
+                  <tr>
+                    <td>Reverse Primer Size</td>
+                    <td>${pcrData['reverse primer size']}</td>
+                  </tr>
+                  <tr>
+                    <td>Reverse Primer Start</td>
+                    <td>${pcrData['reverse primer start']}</td>
+                  </tr>
+                  <tr>
+                    <td>Reverse Primer End</td>
+                    <td>${pcrData['reverse primer end']}</td>
+                  </tr>
+                  <tr>
+                    <td>Reverse Primer TM</td>
+                    <td>${pcrData['reverse primer TM']}</td>
+                  </tr>
+                  <tr>
+                    <td>Reverse Primer GC%</td>
+                    <td>${pcrData['reverse primer GC%']}</td>
+                  </tr>
+                  <tr>
+                    <td>Reverse Primer ΔG</td>
+                    <td>${pcrData['reverse primer delta G']}</td>
+                  </tr>
+                  <tr>
+                    <td>Reverse Primer Self Binding (3')</td>
+                    <td>${pcrData["reverse primer self-binding (3') score"]}</td>
+                  </tr>
+                  <tr>
+                    <td>Reverse Primer Self Binding (anywhere) Score</td>
+                    <td>${pcrData['reverse primer self-binding (anywhere) score']}</td>
+                  </tr>
+                  <tr>
+                    <td>Reverse Primer Penalty Score</td>
+                    <td>${pcrData['reverse primer penalty score']}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          `;
+		break;
+		
+            case 'tab_6': // Validation tab
+		const validationStatus = pcrData['experimental validation'] === 1 ? 
+		    '<span class="badge badge-success">Validated</span>' : 
+		    '<span class="badge badge-warning">Not Validated</span>';
+		
+		const imagePath = pcrData['experimental validation image'] ? 
+		      `./media/validated_images/${pcrData['experimental validation image']}` : 
+		      '';
+
+		
+		const showValidationLink = pcrData['experimental validation'] != 1;
+		
+		content = `
+            <div class="flex flex-col items-center gap-4 p-4">
+              ${(pcrData["experimental validation"] == 1) ? 
+                `<div class="max-w-lg w-full mb-4">
+                    <img src="${imagePath}" alt="Validation Image" class="w-full rounded-lg shadow-lg" />
+                    </div>` : 
+                ''
+              }
+              
+              <div class="overflow-x-auto w-full">
+                <table class="table table-zebra w-full">
+                  <tbody>
+                    <tr>
+                      <td class="font-semibold">Validation Status</td>
+                      <td>${validationStatus}</td>
+                    </tr>
+                    ${pcrData['experimental validation'] == 1 ? 
+                      `<tr>
+                    <td class="font-semibold">Validation Group</td>
+                    <td>${pcrData['validation_group'] || 'N/A'}</td>
+                      </tr>
+                      <tr>
+                        <td class="font-semibold">Validation Method</td>
+                        <td>${pcrData['validation_technique'] || 'N/A'}</td>
+                      </tr>` : 
+                      ''
+                    }
+                    ${showValidationLink ? 
+                      `<tr>
+                        <td class="font-semibold">Validate</td>
+                        <td><a id="${pcrData['id']}" href="https://razor.luddy.indianapolis.iu.edu/validate.html">Validate This Primer Pair</a></td>
+                      </tr>` : 
+                      ''
+                    }
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+		break;
+	    }
+	    
+	    contentDiv.innerHTML = content;
+	}
+
+
+
+     function rename_primer_data(data) {
+	 let cols = ["id", "accession", "virus abbreviation", "virus complete name", "isolate", "genome_length", "PCR product start", "PCR product end", "PCR product size", "PCR product sequence", "PCR product TM", "pair self-binding (anywhere) score", "pair self-binding (3') score", "annealing_temp", "pair TM difference", "pair penalty score", "forward primer start", "forward primer end", "forward primer size", "forward primer sequence",  "forward primer TM", "forward primer GC%", "forward primer self-binding (anywhere) score", "forward primer self-binding (3') score", "forward primer stable hairpin TM", "forward primer delta G", "forward primer penalty score", "reverse primer start", "reverse primer end", "reverse primer size", "reverse primer sequence", "reverse primer TM", "reverse primer GC%", "reverse primer self-binding (anywhere) score", "reverse primer self-binding (3') score", "reverse primer stable hairpin TM", "reverse primer delta G", "reverse primer penalty score", "experimental validation", "experimental validation image", "validation_group", "validaton_technique"]
+
+	  return rename_objects(data, cols);
+      };	  
+
+
+	
+	// Function to close the modal
+	function closeModal() {
+	    const modal = document.getElementById('pcr_modal');
+	    modal.close();
+	    document.getElementById('modalContainer').innerHTML = '';
+	}	
+	
+	
+	/* Listeners   */
+
+
+
+
+
+
+
+
+	
+	
+
+	window.browser.on('trackclick', (track, popover_data) => {
+            console.log("track_click");
+	    if (track.id == "Amplicon") {
+		var clicked_id = popover_data[0].value;
+		var clicked_row = table_api.getRowNode(clicked_id).data;
+		open_modal(clicked_row);
+		//console.log(popover_data);
+		//console.log(clicked_id);
+		//console.log(clicked_row);
+	    }
+	    return false;
+	});
+
+
+	emitter.on("show_igv_roi", (data) => {
+	    console.log(data);
+	    show_selected_roi_track(data);
+	});
+
+	emitter.on("loading-error", (error) => {
+	    Swal.fire({
+		title: 'IGV Browser Timeout',
+		html: '<p>' + error.message + "<br>Reload the Browser" + "</p>",
+		icon: 'error',
+		confirmButtonText: 'ok',
+		confirmButtonColor: "#737373"
+	    });	    
+	});
+
+
+	filter_reset.addEventListener("click", (event) => {
+            emitter.emit(
+		"filter_reset",
+		{}
+            );
+	});
+
+	emitter.on("filter_reset", (data) => {
+	    filter_by_id.value = '';
+            emitter.emit(
+                "update_common_data2",
+                reset_data()
+            )
+	    
+	});
+
+	
+	// download
+	download_selected.addEventListener("click", (event) => {
+
+	    if (checked_ids.length == 0) {
+		Swal.fire({
+                    title: 'No Rows Selected',
+                    icon: 'error',
+                    confirmButtonText: 'ok',
+		    confirmButtonColor: "#737373"
+		});
+	    } else {
+		var params = {
+		    fileName: 'selected_primers.csv',
+		    columnSeparator: ',', 
+		    skipColumnHeaders: false,
+		    allColumns: false, 
+		    onlySelected: true,
+		};
+		table_api.exportDataAsCsv(params);
+	    }
+	});
+
+
+
+	function filterValidatedItems(objectOfObjects) {
+	    // Convert object of objects to array of objects using Object.values
+	    const arrayOfObjects = Object.values(objectOfObjects);
+	    // Filter the array to keep only items with experimental_validation of 1 or true
+	    const filteredArray = arrayOfObjects.filter(item =>
+		item["experimental validation"] === 1 || item["experimental validation"] === true
+	    );
+	    
+	    return filteredArray;
+	}
+
+	
+
+	filter_validated.addEventListener("click", (event) => {
+            var common_data_copy = structuredClone(window.common_data);
+	    var to_add = filterValidatedItems(common_data_copy);
+	    console.log(to_add);
+	    table_api.setGridOption('rowData', []);
+            table_api.applyTransaction({ add: to_add });
+
+	});
+
+
+	
+        download_all.addEventListener("click", (event) => {
+            var params = {
+                fileName: 'all_primers.csv',
+                columnSeparator: ',',
+                skipColumnHeaders: false,
+                allColumns: false,
+                onlySelected: false,
+            };
+            table_api.exportDataAsCsv(params);
+        });
+    
+    
+      // filter
+      filter_col.addEventListener('change', (event) => {
+	  emitter.emit(
+	      "filter_col_change",
+	      event.target.value
+	  );
+      });
+
+      emitter.on("filter_col_change", (data) => {
+	  // update
+	  update_input_ui({set_boundary:true})
+          emitter.emit(
+              "update_common_data2",
+              {}
+          )
+
+	  
+      });
+
+	//
+	let is_updating = false;
+	histogram.on('plotly_relayout', function(data) {
+	    console.log("test histogram");
+	    const update = {};
+
+	    if (is_updating) return;
+	    is_updating = true;
+	    
+	    if ("xaxis.autorange" in data) {
+		is_updating = false;
+		console.log("histogram_reset");
+		emitter.emit(
+		    "update_common_data2",
+		    {}
+		);
+	    } else {
+
+		if (data['xaxis.range[0]'] !== undefined) {
+		    update['xaxis.range'] = [
+			data['xaxis.range[0]'],
+			data['xaxis.range[1]']
+                    ];
+		} else if (data['xaxis.range'] !== undefined) {
+                    update['xaxis.range'] = data['xaxis.range'];
+		};
+
+		if (Object.keys(update).length > 0) {
+                    Plotly.relayout(histogram, update)
+			.then(() => {
+                            is_updating = false;
+			})
+		        .catch((error) => {
+                            console.error('Error updating layout:', error);
+                            is_updating = false;
+			});
+		    var data = sanitize_histogram_values(update["xaxis.range"]);
+		    emitter.emit(
+			"histogram_change",
+			data
+		    );
+		} else {
+		    is_updating = false;
+		}
+	    };
+	    
+	});
+
+	emitter.on("histogram_change", (data) => {
+	    //console.log(data);
+            update_min_max({update_info:data});
+            emitter.emit(
+		"update_common_data2",
+		{}
+            )
+	});
+	
+    
+      input_min.addEventListener('change', (event) => {
+	  update_min_max({update_info:null});
+	  
+          emitter.emit(
+              "update_common_data2",
+              {}
+          )
+	  
+      });
+
+      input_max.addEventListener('change', (event) => {
+	  update_min_max({});
+          emitter.emit(
+              "update_common_data2",
+              {}
+          )
+      });
+
+	emitter.on("table_selection_changed", (data) => {
+	    checked_ids = data.map(obj => obj.id);
+            emitter.emit(
+		"update_common_data2",
+		{skip_table:false, skip_histogram:true}
+            )
+	    
+	});
+
+	emitter.on("show_primer_bed", (data) => {
+	    create_primer_bed();
+	});
+      
+
+      
+	emitter.on("update_common_data2", (modifiers) => {
+	    emitter.emit(
+                "update_ui_elements",
+                update_common_data2(modifiers)
+            )
+	    
+	});
+
+
+	emitter.on("update_ui_elements", (data) => {
+	    update_ui_elements(data);
+	});
+	
+
+
+
+
+
+      
+      
+      // listener for PCR primer GET Request
+	emitter.on('get_primer_success', (data) => {
+	    console.log(data);
+	    console.log(typeof(data));
+            // initialize the filters
+            set_filter_values({data:data, set_boundary:true});
+	    
+	    // make clone of the data
+	    set_common_data(data);
+	    
+	    // populate the pcr primer data table
+	    populate_table(data);
+	    
+	    //fill the histogram
+	    update_histogram(data);
+	    
+	    // create pcr pair quality track
+	    show_pcr_quality({data:data});
+	    
+	});      
+
+	
+	get_request(
+	    "https://razor.luddy.indianapolis.iu.edu/php/primer_search.php",
+	    {"q":virus_data.virus_genome_abbreviated_name},
+	    "get_primer_success",
+	    "get_primer_error"
+	);
+	
+	
+	  
+    	  
+    })();
+
+      </script>
+    
+</body>
+</html>
