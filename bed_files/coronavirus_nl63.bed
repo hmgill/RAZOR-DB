@@ -1,0 +1,7 @@
+NC_005831.2	286	20475	ORF1ab	gene	0	.	gene_id "ORF1ab"; transcript_id "ORF1ab"
+NC_005831.2	286	12469	ORF1a polyprotein	CDS	0	.	gene_id "ORF1a polyprotein"; transcript_id "ORF1a polyprotein"
+NC_005831.2	20471	24542	NC_005831.2	gene	0	.	gene_id "NC_005831.2"; transcript_id "NC_005831.2"
+NC_005831.2	24541	25219	NC_005831.2	gene	0	.	gene_id "NC_005831.2"; transcript_id "NC_005831.2"
+NC_005831.2	25199	25433	E	gene	0	.	gene_id "E"; transcript_id "E"
+NC_005831.2	25441	26122	M	gene	0	.	gene_id "M"; transcript_id "M"
+NC_005831.2	26132	27266	N	gene	0	.	gene_id "N"; transcript_id "N"

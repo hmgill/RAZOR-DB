@@ -1,0 +1,7 @@
+NC_021928.1	100	1756	NP	gene	0	.	gene_id "NP"; transcript_id "NP"
+NC_021928.1	2040	3238	P	gene	0	.	gene_id "P"; transcript_id "P"
+NC_021928.1	2040	2730	V	gene	0	.	gene_id "V"; transcript_id "V"
+NC_021928.1	3530	4679	M	gene	0	.	gene_id "M"; transcript_id "M"
+NC_021928.1	5173	6805	F	gene	0	.	gene_id "F"; transcript_id "F"
+NC_021928.1	7521	9246	HN	gene	0	.	gene_id "HN"; transcript_id "HN"
+NC_021928.1	9985	16825	L	gene	0	.	gene_id "L"; transcript_id "L"

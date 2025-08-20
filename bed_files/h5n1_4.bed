@@ -1,0 +1,3 @@
+PQ667150.1	0	1704	HA	gene	0	.	gene_id "HA"; transcript_id "HA"
+PQ667150.1	48	1035	HA1	mat_peptide	0	.	gene_id "HA1"; transcript_id "HA1"
+PQ667150.1	1035	1701	HA2	mat_peptide	0	.	gene_id "HA2"; transcript_id "HA2"

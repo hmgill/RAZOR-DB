@@ -1,0 +1,3 @@
+NC_026433.1	0	1701	HA	gene	0	.	gene_id "HA"; transcript_id "HA"
+NC_026433.1	51	1032	HA1	mat_peptide	0	.	gene_id "HA1"; transcript_id "HA1"
+NC_026433.1	1032	1698	HA2	mat_peptide	0	.	gene_id "HA2"; transcript_id "HA2"
