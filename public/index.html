@@ -16,75 +16,11 @@
    <!-- Slim Select 2 -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/2.8.1/slimselect.min.js"></script>
    <title>RAZOR</title>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "RAZOR",
-  "description": "A tool for virus search and PCR primer validation for viral detection",
-  "applicationCategory": "Scientific",
-  "operatingSystem": "Any",
-  "url": "https://razor.luddy.indianapolis.iu.edu/",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD"
-  },
-  "provider": {
-    "@type": "Organization",
-    "name": "Janga Lab at Indiana University Indianapolis",
-    "url": "https://janga.lab.indianapolis.iu.edu/"
-  },
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://razor.luddy.indianapolis.iu.edu/results.html?virus={virus_name}"
-    },
-    "query-input": "required name=virus_name"
-  },
-  "downloadUrl": [
-    "https://razor.luddy.indianapolis.iu.edu/downloads/razor_database.zip",
-    "https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip",
-    "https://razor.luddy.indianapolis.iu.edu/downloads/razor_validated_primer_images.zip"
-  ],
-  "keywords": "virus, PCR primers, coronavirus, SARS-CoV-2, influenza, primer validation",
-  "softwareVersion": "1.0",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "name": "RAZOR - Virus Search Tool",
-    "description": "Search and validate PCR primers for viral detection",
-    "breadcrumb": {
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://razor.luddy.indianapolis.iu.edu/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Usage",
-          "item": "https://razor.luddy.indianapolis.iu.edu/usage.html"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "Validate Primers",
-          "item": "https://razor.luddy.indianapolis.iu.edu/validate.html"
-        }
-      ]
-    }
-  }
-}
-</script>
-<meta property="og:title" content="RAZOR - Virus PCR Primer Database">
-<meta property="og:description" content="RAZOR provides a comprehensive database of validated PCR primers for virus detection, including SARS-CoV-2, influenza, and respiratory viruses. Developed by Janga Lab at Indiana University Indianapolis.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://razor.luddy.indianapolis.iu.edu/">
-<meta property="og:site_name" content="RAZOR">
+   <meta property="og:title" content="RAZOR - Virus PCR Primer Database">
+   <meta property="og:description" content="RAZOR provides a comprehensive database of validated PCR primers for virus detection, including SARS-CoV-2, influenza, and respiratory viruses. Developed by Janga Lab at Indiana University Indianapolis.">
+   <meta property="og:type" content="website">
+   <meta property="og:url" content="https://razor.luddy.indianapolis.iu.edu/">
+   <meta property="og:site_name" content="RAZOR">
    
 </head>
 <body>
@@ -92,13 +28,13 @@
     <div class="min-h-[5vh] mb-2 flex justify-end " id="block_a">
       <ul class="menu menu-md menu-horizontal bg-base-100">
         <li>
-          <a href="https://razor.luddy.indianapolis.iu.edu/"><i class="fa-solid fa-house"></i>Home</a>
+          <a href="index.html/"><i class="fa-solid fa-house"></i>Home</a>
         </li>
         <li>
-          <a href="https://razor.luddy.indianapolis.iu.edu/usage.html"><i class="fa-solid fa-book"></i>Usage</a>
+          <a href="usage.html"><i class="fa-solid fa-book"></i>Usage</a>
         </li>
         <li>
-          <a href="https://razor.luddy.indianapolis.iu.edu/validate.html"><i class="fa-solid fa-virus"></i>Validate Primers</a>
+          <a href="validate.html"><i class="fa-solid fa-virus"></i>Validate Primers</a>
         </li>
       </ul>
     </div>
@@ -124,7 +60,7 @@
       <div class="flex-1 flex items-center justify-center border-r border-gray-200" id="block_d1">
 	<div class="text-center">
 	  <h2 class="text-xl font-semibold mb-2 text-gray-500">Download Complete Database</h2>
-	  <a class="text-gray-600" href="https://razor.luddy.indianapolis.iu.edu/downloads/razor_database.zip">Database</a>
+	  <a class="text-gray-600" href="../downloads/razor_database.zip">Database</a>
 	</div>
       </div>
       
@@ -132,7 +68,7 @@
       <div class="flex-1 flex items-center justify-center border-r border-gray-200" id="block_d2">
 	<div class="text-center">
 	  <h2 class="text-xl font-semibold mb-2 text-gray-500">Download PCR Primers</h2>
-	  <a class="text-gray-600" href="https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip">PCR Primers Only</a>
+	  <a class="text-gray-600" href="../downloads/primers.zip">PCR Primers Only</a>
 	</div>
       </div>
       
@@ -140,7 +76,7 @@
       <div class="flex-1 flex items-center justify-center" id="block_d3">
 	<div class="text-center">
 	  <h2 class="text-xl font-semibold mb-2 text-gray-500">Download Validated Images</h2>
-	  <a class="text-gray-600" href="https://razor.luddy.indianapolis.iu.edu/downloads/razor_validated_primer_images.zip">Validated PCR Primer Images Only</a>
+	  <a class="text-gray-600" href="../downloads/razor_validated_primer_images.zip">Validated PCR Primer Images Only</a>
 	</div>
       </div>
     </div>        
@@ -166,7 +102,7 @@
     <!-- Block F with horizontal divisions but no dividers -->
     <div class="min-h-[5vh] flex justify-between mb-2" id="block_f">
       <div class="flex-1 flex items-center justify-center" id="block_f1">
-          <a href="https://razor.luddy.indianapolis.iu.edu/policy.html"><i class="fa-solid fa-link"></i>  Privacy Policy</a>
+          <a href="policy.html"><i class="fa-solid fa-link"></i>  Privacy Policy</a>
       </div>
 
       
@@ -287,7 +223,7 @@
 	populate_select();
 	
         get_request(
-            "https://razor.luddy.indianapolis.iu.edu/php/virus_search2.php",
+            "../php/virus_search2.php",
             "search_success",
             "search_error"
         )
@@ -346,7 +282,7 @@
 	go.addEventListener('click', () => {
 	    console.log(window.virus_data[select.value]);
 	    localStorage.setItem('result', JSON.stringify(window.result));
-	    window.location.href = 'https://razor.luddy.indianapolis.iu.edu/results.html';	    
+	    window.location.href = 'results.html';	    
 	});	
 	
 	

@@ -31,132 +31,12 @@
     <!-- fontawesome 2 -->
     <script src="https://kit.fontawesome.com/80f6f556bc.js" crossorigin="anonymous"></script>
     
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "RAZOR PCR Primer Results",
-  "description": "Interactive visualization and analysis tool for PCR primers targeting viral genomes, including detailed primer information and genome browser",
-  "url": "https://https://razor.luddy.indianapolis.iu.edu/results.html",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "RAZOR",
-    "url": "https://razor.luddy.indianapolis.iu.edu/"
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Search",
-        "item": "https://razor.luddy.indianapolis.iu.edu/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "PCR Primer Results",
-        "item": "https://razor.luddy.indianapolis.iu.edu/results.html"
-      }
-    ]
-  },
-  "mainEntity": {
-    "@type": "Dataset",
-    "name": "Viral PCR Primer Collection",
-    "description": "Collection of PCR primers designed for various viral genomes including SARS-CoV-2, influenza, and other respiratory viruses",
-    "creator": {
-      "@type": "Organization",
-      "name": "Janga Lab at Indiana University Indianapolis",
-      "url": "https://janga.lab.indianapolis.iu.edu/"
-    },
-    "license": "https://razor.luddy.indianapolis.iu.edu/policy.html",
-    "variableMeasured": [
-      {
-        "@type": "PropertyValue",
-        "name": "Primer Pair ID",
-        "description": "Unique identifier for PCR primer pair"
-      },
-      {
-        "@type": "PropertyValue",
-        "name": "Amplicon Size",
-        "description": "Size of the PCR product in base pairs",
-        "unitText": "bp"
-      },
-      {
-        "@type": "PropertyValue",
-        "name": "Primer TM",
-        "description": "Melting temperature of primers",
-        "unitText": "°C"
-      }
-    ]
-  },
-  "specialty": [
-    "Molecular Biology",
-    "Virology",
-    "PCR Diagnostics"
-  ],
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock",
-    "url": "https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip"
-  },
-  "potentialAction": [
-    {
-      "@type": "DownloadAction",
-      "name": "Download Selected Primers",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip"
-      }
-    },
-    {
-      "@type": "DownloadAction",
-      "name": "Download All Primers",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://razor.luddy.indianapolis.iu.edu/downloads/primers.zip"
-      }
-    }
-  ],
-  "publisher": {
-    "@type": "EducationalOrganization",
-    "name": "Indiana University Indianapolis",
-    "url": "https://www.iu.edu/",
-    "department": {
-      "@type": "Organization",
-      "name": "Janga Lab at Indiana University Indianapolis",
-      "url": "https://janga.lab.indianapolis.iu.edu/"
-    }
-  },
-  "hasPart": [
-    {
-      "@type": "SoftwareApplication",
-      "name": "IGV Browser",
-      "applicationCategory": "Genome Browser",
-      "operatingSystem": "Any"
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "AG Grid",
-      "applicationCategory": "DataGrid",
-      "operatingSystem": "Any"
-    }
-  ],
-  "audience": {
-    "@type": "Audience",
-    "audienceType": "Researchers, Scientists, Laboratory Technicians"
-  },
-  "keywords": "PCR primers, viral genome, SARS-CoV-2, influenza, respiratory viruses, genomics, amplicon, primer design"
-}
-</script>
-<!-- Open Graph / Social Media Tags -->
-<meta property="og:title" content="RAZOR Results - PCR Primer Analysis">
-<meta property="og:description" content="Interactive visualization of PCR primers for viral detection. Analyze viral genome sequences, primer locations, and technical specifications with RAZOR's comprehensive primer database.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://razor.luddy.indianapolis.iu.edu/results.html">
-<meta property="og:site_name" content="RAZOR">
+    <!-- Open Graph / Social Media Tags -->
+    <meta property="og:title" content="RAZOR Results - PCR Primer Analysis">
+    <meta property="og:description" content="Interactive visualization of PCR primers for viral detection. Analyze viral genome sequences, primer locations, and technical specifications with RAZOR's comprehensive primer database.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://razor.luddy.indianapolis.iu.edu/results.html">
+    <meta property="og:site_name" content="RAZOR">
 </head>
 
 <body>
@@ -179,13 +59,13 @@
       <div class="block-a2 w-1/2 flex justify-end items-center">
 	<ul class="menu menu-md menu-horizontal bg-base-100">	
         <li>
-          <a href="https://razor.luddy.indianapolis.iu.edu/"><i class="fa-solid fa-house"></i>Home</a>
+          <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
         </li>
         <li>
-          <a href="https://razor.luddy.indianapolis.iu.edu/usage.html"><i class="fa-solid fa-book"></i>Usage</a>
+          <a href="usage.html"><i class="fa-solid fa-book"></i>Usage</a>
         </li>
         <li>
-          <a href="https://razor.luddy.indianapolis.iu.edu/validate.html"><i class="fa-solid fa-virus"></i>Validate Primers</a>
+          <a href="validate.html"><i class="fa-solid fa-virus"></i>Validate Primers</a>
         </li>	
       </div>
       </ul>
@@ -352,14 +232,14 @@
         const genome = {
             "id": virus_data.virus_genome_full_name,
             "name": virus_data.virus_genome_abbreviated_name,
-            "fastaURL": `./genomes/${virus_data.virus_genome_abbreviated_name}.fa`,
-            "indexURL": `./genomes/${virus_data.virus_genome_abbreviated_name}.fa.fai`
+            "fastaURL": `../genomes/${virus_data.virus_genome_abbreviated_name}.fa`,
+            "indexURL": `../genomes/${virus_data.virus_genome_abbreviated_name}.fa.fai`
         };
 	
         const tracks = [
             {
                 name: "Genes",
-                url: `./bed_files/${virus_data.virus_genome_abbreviated_name}.bed`,
+                url: `../bed_files/${virus_data.virus_genome_abbreviated_name}.bed`,
                 format: "bed",
                 displayMode: "EXPANDED",
                 color: "rgb(0, 0, 150)"
@@ -1627,7 +1507,7 @@
                     ${showValidationLink ? 
                       `<tr>
                         <td class="font-semibold">Validate</td>
-                        <td><a id="${pcrData['id']}" href="https://razor.luddy.indianapolis.iu.edu/validate.html">Validate This Primer Pair</a></td>
+                        <td><a id="${pcrData['id']}" href="validate.html">Validate This Primer Pair</a></td>
                       </tr>` : 
                       ''
                     }
@@ -1932,7 +1812,7 @@
 
 	
 	get_request(
-	    "https://razor.luddy.indianapolis.iu.edu/php/primer_search.php",
+	    "../php/primer_search.php",
 	    {"q":virus_data.virus_genome_abbreviated_name},
 	    "get_primer_success",
 	    "get_primer_error"

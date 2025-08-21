@@ -17,112 +17,25 @@
    <!-- Sweet Alerts 2 -->
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.15.10/dist/sweetalert2.all.min.js"></script>
    <title>RAZOR</title>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "RAZOR Primer Validation",
-  "description": "Submit PCR primer validation data for viral detection through RAZOR's validation system",
-  "url": "https://https://razor.luddy.indianapolis.iu.edu/validate.html",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "RAZOR",
-    "url": "https://https://razor.luddy.indianapolis.iu.edu//"
-  },
-  "breadcrumb": {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://https://razor.luddy.indianapolis.iu.edu//"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Validate Primers",
-        "item": "https://https://razor.luddy.indianapolis.iu.edu/validate.html"
-      }
-    ]
-  },
-  "mainEntity": {
-    "@type": "DataFeedItem",
-    "dateCreated": "2025-04-22",
-    "about": [
-      {
-        "@type": "MedicalCondition",
-        "name": "Viral Infections"
-      }
-    ]
-  },
-  "potentialAction": {
-    "@type": "SubmitAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": "https://https://razor.luddy.indianapolis.iu.edu/php/process_validation.php",
-      "encodingType": "multipart/form-data",
-      "httpMethod": "POST",
-      "contentType": "multipart/form-data"
-    },
-    "object": {
-      "@type": "Dataset",
-      "name": "PCR Primer Validation Data",
-      "description": "Validation data for PCR primers used in viral detection",
-      "creator": {
-        "@type": "Organization",
-        "name": "Janga Lab at Indiana University Indianapolis",
-        "url": "https://janga.lab.indianapolis.iu.edu/"
-      }
-    }
-  },
-  "publisher": {
-    "@type": "EducationalOrganization",
-    "name": "Indiana University Indianapolis",
-    "url": "https://www.iu.edu/",
-    "department": {
-      "@type": "Organization",
-      "name": "Janga Lab at Indiana University Indianapolis",
-      "url": "https://janga.lab.indianapolis.iu.edu/"
-    }
-  },
-  "specialty": [
-    "Virology",
-    "PCR Diagnostics",
-    "Molecular Biology"
-  ],
-  "keywords": "virus validation, PCR primers, coronavirus, influenza, viral detection, SARS-CoV-2, primer validation",
-  "audience": {
-    "@type": "Audience",
-    "audienceType": "Researchers, Scientists, Laboratory Technicians"
-  },
-  "relatedLink": [
-    "https://https://razor.luddy.indianapolis.iu.edu/policy.html",
-    "https://www.primer3plus.com/primer3plusAbout.html",
-    "https://github.com/Janga-Lab/RAZOR",
-    "https://janga.lab.indianapolis.iu.edu/"
-  ]
-}
-</script>   
-<!-- Open Graph / Social Media Tags -->
-<meta property="og:title" content="RAZOR Primer Validation - Submit PCR Primer Data">
-<meta property="og:description" content="Submit and validate PCR primers for viral detection through RAZOR's validation system. Upload documentation and images to contribute to our comprehensive viral primer database.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://razor.luddy.indianapolis.iu.edu/validate.html">
-<meta property="og:site_name" content="RAZOR">
+   <!-- Open Graph / Social Media Tags -->
+   <meta property="og:title" content="RAZOR Primer Validation - Submit PCR Primer Data">
+   <meta property="og:description" content="Submit and validate PCR primers for viral detection through RAZOR's validation system. Upload documentation and images to contribute to our comprehensive viral primer database.">
+   <meta property="og:type" content="website">
+   <meta property="og:url" content="https://razor.luddy.indianapolis.iu.edu/validate.html">
+   <meta property="og:site_name" content="RAZOR">
 </head>
 <body>
   <div class="mx-[10%] mt-[1%] ">
     <div class="min-h-[5vh] mb-2 flex justify-end " id="block_a">
       <ul class="menu menu-md menu-horizontal bg-base-100">
         <li>
-          <a href="https://razor.luddy.indianapolis.iu.edu/"><i class="fa-solid fa-house"></i>Home</a>
+          <a href="index.html"><i class="fa-solid fa-house"></i>Home</a>
         </li>
         <li>
-          <a href="https://razor.luddy.indianapolis.iu.edu/usage.html"><i class="fa-solid fa-book"></i>Usage</a>
+          <a href="usage.html"><i class="fa-solid fa-book"></i>Usage</a>
         </li>
         <li>
-          <a href="https://razor.luddy.indianapolis.iu.edu/validate.html"><i class="fa-solid fa-virus"></i>Validate Primers</a>
+          <a href="validate.html"><i class="fa-solid fa-virus"></i>Validate Primers</a>
         </li>
       </ul>
       </ul>
@@ -188,7 +101,7 @@
     <!-- Block F with horizontal divisions but no dividers -->
     <div class="min-h-[5vh] flex justify-between mb-2" id="block_f">
       <div class="flex-1 flex items-center justify-center" id="block_f1">
-          <a href="https://razor.luddy.indianapolis.iu.edu/policy.html"><i class="fa-solid fa-link"></i>  Privacy Policy</a>
+          <a href="policy.html"><i class="fa-solid fa-link"></i>  Privacy Policy</a>
       </div>
       
       <!-- F1: Left section -->
@@ -401,7 +314,7 @@
     populate_virus_select();
 
     get_request(
-        "https://razor.luddy.indianapolis.iu.edu/php/pair_search.php",
+        "../php/pair_search.php",
         {"q":"NC_045512.2"},
         "get_pairs_success",
         "get_pairs_error"
@@ -421,7 +334,7 @@
 	// clear the primer id list
 	window.id_slim_select.destroy();
 	get_request(
-            "https://razor.luddy.indianapolis.iu.edu/php/pair_search.php",
+            "../php/pair_search.php",
             {"q":new_accession},
             "get_pairs_success",
             "get_pairs_error"
@@ -479,7 +392,7 @@
 	    }
 
 
-	    fetch('https://razor.luddy.indianapolis.iu.edu/php/process_validation.php', {
+	    fetch('../php/process_validation.php', {
 		method: 'POST',
 		body: formData,
 	    })

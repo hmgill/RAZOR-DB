@@ -1,5 +1,5 @@
 #block_b {
-    background: url('https://razor.luddy.indianapolis.iu.edu/media/general/razor-background-1.png');
+    background: url('../media/general/razor-background-1.png');
     background-size: contain;
     border-radius: 20px 20px 0 0;
 }
